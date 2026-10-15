@@ -1,0 +1,16 @@
+*.exe
+*.exe.config
+*.zip
+*.tgz
+*.tar.*
+node_modules/
+_runtime/
+_build/
+artifacts/
+__pycache__/
+*.pyc
+!YTWin7SabrHost.exe.config
+encoder/sources/
+SOURCE/vendor/build-tree/
+
+!SOURCE/vendor/*.tgz

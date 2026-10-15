@@ -1,0 +1,100 @@
+install prefix            /YouTubeDownloader-build
+source path               .
+C compiler                i686-w64-mingw32-clang
+C library                 mingw64
+host C compiler           gcc
+host C library            mingw64
+ARCH                      c (i686)
+big-endian                no
+runtime cpu detection     yes
+debug symbols             no
+strip symbols             yes
+optimize for size         no
+optimizations             yes
+static                    yes
+shared                    no
+postprocessing support    no
+network support           no
+threading support         pthreads
+safe bitstream reader     yes
+texi2html enabled         no
+perl enabled              no
+pod2man enabled           no
+makeinfo enabled          no
+makeinfo supports HTML    no
+xmllint enabled           no
+
+External libraries:
+libmp3lame
+
+External libraries providing hardware acceleration:
+
+Libraries:
+avcodec                 avformat                swscale
+avdevice                avutil
+avfilter                swresample
+
+Programs:
+ffmpeg                  ffprobe
+
+Enabled decoders:
+aac                     mp3float                pcm_s24le
+aac_fixed               opus                    pcm_s32le
+aac_latm                pcm_f32le               vp9
+h264                    pcm_f64le
+mp3                     pcm_s16le
+
+Enabled encoders:
+libmp3lame              pcm_s16le
+pcm_f32le               pcm_s24le
+
+Enabled hwaccels:
+
+Enabled parsers:
+aac                     av1                     opus
+aac_latm                h264                    vp9
+ac3                     mpegaudio
+
+Enabled demuxers:
+aac                     matroska                ogg
+concat                  mov                     wav
+h264                    mp3
+ivf                     obu
+
+Enabled muxers:
+adts                    mov                     null
+ipod                    mp3                     wav
+matroska                mp4
+
+Enabled protocols:
+concat                  file                    pipe
+
+Enabled filters:
+aformat                 atrim                   null
+anull                   concat                  transpose
+aresample               format                  trim
+asetpts                 hflip                   vflip
+
+Enabled bsfs:
+aac_adtstoasc           h264_mp4toannexb        vp9_superframe_split
+av1_frame_merge         pgs_frame_merge
+extract_extradata       vp9_superframe
+
+Enabled indevs:
+
+Enabled outdevs:
+
+License: LGPL version 2.1 or later
+
+WARNING: pkg-config not found, library detection may fail.
+config_components.h is unchanged
+libavutil/avconfig.h is unchanged
+libavfilter/filter_list.c is unchanged
+libavcodec/codec_list.c is unchanged
+libavcodec/parser_list.c is unchanged
+libavcodec/bsf_list.c is unchanged
+libavformat/demuxer_list.c is unchanged
+libavformat/muxer_list.c is unchanged
+libavdevice/indev_list.c is unchanged
+libavdevice/outdev_list.c is unchanged
+libavformat/protocol_list.c is unchanged

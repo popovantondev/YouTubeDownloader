@@ -1,0 +1,15 @@
+name: Problem / Ошибка / Problem
+description: Report a reproducible problem. Do not include private URLs or credentials.
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Windows / Browser / Extension version
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Steps, selected format and exact error / Шаги и ошибка / Schritte und Fehler
+    validations:
+      required: true

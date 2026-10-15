@@ -1,0 +1,47 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
+const root=process.argv[2]||path.join(__dirname,'../../extension');
+const script=n=>fs.readFileSync(path.join(root,n),'utf8');
+function event(){const handlers=[];return {addListener:f=>handlers.push(f),emit:m=>handlers.forEach(f=>f(m))};}
+class Element {constructor(tag,ns){this.tagName=tag;this.namespaceURI=ns;this.children=[];this.attributes={};this.style={};this.listeners={};this.classList={contains:()=>false};}setAttribute(k,v){this.attributes[k]=String(v);}appendChild(n){n.parent=this;this.children.push(n);return n;}append(...n){n.forEach(x=>this.appendChild(x));}insertBefore(n,b){n.parent=this;const i=this.children.indexOf(b);this.children.splice(i<0?this.children.length:i,0,n);}remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);}addEventListener(k,f){(this.listeners[k]||(this.listeners[k]=[])).push(f);}removeEventListener(k,f){this.listeners[k]=(this.listeners[k]||[]).filter(x=>x!==f);}emit(k){for(const f of this.listeners[k]||[])f();}set textContent(t){this.text=t;this.children=[];}get textContent(){return this.text||'';}}
+const base=new Element('root'),panel=new Element('div'),bar=new Element('progress');panel.id='ytw7-panel';bar.id='ytw7-progress';base.appendChild(panel);panel.appendChild(bar);
+function all(e=base){return [e,...e.children.flatMap(x=>all(x))];}
+let video=new Element('video');Object.assign(video,{currentTime:0,duration:6,paused:true,ended:false,play:()=>{video.paused=false;return Promise.resolve();}});
+const player=new Element('player');player.id='movie_player';base.appendChild(player);
+const document={title:'Test - YouTube',getElementById:id=>all().find(n=>n.id===id),querySelector:s=>s==='video.html5-main-video'?video:null,querySelectorAll:()=>all().filter(n=>'data-ytw7-format' in n.attributes),createElement:n=>new Element(n),createElementNS:(ns,n)=>new Element(n,ns),addEventListener:()=>{}};
+const handlers={},progress=[],controls=[],native=[];let port;
+const window={addEventListener:(name,fn)=>(handlers[name]||(handlers[name]=[])).push(fn),dispatchEvent:e=>{if(e.type==='ytw7-progress')progress.push(e.detail);(handlers[e.type]||[]).forEach(f=>f(e));},postMessage:m=>controls.push(m)};
+const intervals=[];
+const saved={session:'testVideo01-test-session',videoId:'testVideo01',height:720,sourceHeight:720,itag:136,codec:'h264',rate:4,duration:6000,title:'Test'};
+const ctx={window,document,location:{href:'https://www.youtube.com/watch?v=testVideo01',pathname:'/watch',search:'?v=testVideo01',origin:'https://www.youtube.com',reload:()=>{}},sessionStorage:{getItem:()=>JSON.stringify(saved),removeItem:()=>{},setItem:()=>{}},URLSearchParams,URL,Set,Number,Math,JSON,ArrayBuffer,Uint8Array,btoa:s=>Buffer.from(s,'binary').toString('base64'),CustomEvent:class {constructor(type,options){this.type=type;this.detail=options.detail;}},setInterval:f=>(intervals.push(f),intervals.length),setTimeout:()=>1,clearInterval:()=>{},clearTimeout:()=>{},chrome:{runtime:{connect:()=>port={onMessage:event(),onDisconnect:event(),postMessage:m=>native.push(m),disconnect:()=>{}},sendMessage:(m,cb)=>cb({ok:true})}}};
+vm.createContext(ctx);vm.runInContext(script('shared.js'),ctx);vm.runInContext(script('quality_content.js'),ctx);
+const send=data=>(handlers.message||[]).forEach(f=>f({source:window,origin:ctx.location.origin,data}));
+port.onMessage.emit({action:'ready',audioCached:false});send({tag:'YTWIN7_SABR_CAPTURE_11',session:saved.session,type:'state'});intervals.at(-1)();
+send({tag:'YTWIN7_SABR_CAPTURE_11',session:saved.session,type:'warning',error:'network aborted during quality change'});assert(!native.some(m=>m.action==='cancel'));
+send({tag:'YTWIN7_SABR_CAPTURE_11',session:saved.session,type:'playback',videoId:saved.videoId,time:3,duration:6,state:1,ad:false});
+assert(progress.at(-1).value===45);
+Object.assign(video,{duration:NaN,currentTime:NaN});send({tag:'YTWIN7_SABR_CAPTURE_11',session:saved.session,type:'playback',videoId:saved.videoId,time:NaN,duration:NaN,state:2,ad:false});
+assert(progress.at(-1).value===45);assert(progress.every(m=>Number.isFinite(m.value)&&!/NaN|Infinity/.test(m.text)));
+console.log('PASS: NaN player time/duration keeps the last finite percentage and uses the saved duration.');
+const first=video;video=new Element('video');Object.assign(video,{currentTime:4,duration:NaN,paused:false,ended:false});intervals.at(-1)();assert(!(first.listeners.ended||[]).length);assert((video.listeners.ended||[]).length===1);
+console.log('PASS: player video element replacement rebinds the end handler and detaches the stale element.');
+video.ended=true;video.emit('ended');assert(controls.some(m=>m.type==='drain'));send({tag:'YTWIN7_SABR_CAPTURE_11',session:saved.session,type:'drained'});assert(native.some(m=>m.action==='finish'));port.onMessage.emit({action:'result',ok:false,error:'test incomplete'});assert(!progress.at(-1).text.includes('Готово'));
+console.log('PASS: end of a replaced element drains the last response, calls native finish, and does not claim success on an incomplete stream.');
+const formats=[{height:144,sourceHeight:144,itag:160,codec:'h264',rate:4,duration:6000},{height:240,sourceHeight:240,itag:395,codec:'av1',duration:6000},{height:1080,sourceHeight:1080,itag:248,codec:'vp9',duration:6000}];send({tag:'YTWIN7_FORMATS21',videoId:saved.videoId,formats});
+const buttons=document.querySelectorAll();assert.strictEqual(buttons.length,3);assert(buttons[0].style.cssText.includes('#795210'));assert(buttons[1].style.cssText.includes('#795210'));assert(buttons[2].style.cssText.includes('#795210'));assert(buttons.every(b=>b.children[0].tagName==='svg'));
+console.log('PASS: only advertised resolutions are rendered; unverified formats remain brown instead of promising H.264, with SVG video icons.');
+// Metadata is from the current WEB player, and adaptive variants beat progressive 360.
+const env={window:{addEventListener:()=>{},postMessage:()=>{},ytInitialPlayerResponse:null},document:{getElementById:()=>null},location:ctx.location,URL,Number,Map,JSON,Array};vm.createContext(env);vm.runInContext(script('formats_probe.js').replace(/\}\)\(\);\s*$/,'globalThis.test={choices,codec};})();'),env);
+const data={videoDetails:{videoId:saved.videoId,lengthSeconds:'6'},streamingData:{formats:[{itag:18,height:360,mimeType:'video/mp4; codecs="avc1.42,mp4a.40"',bitrate:1000000}],adaptiveFormats:[{itag:134,height:360,mimeType:'video/mp4; codecs="avc1.42"',bitrate:900000},{itag:395,height:240,mimeType:'video/mp4; codecs="av01.0"'},{itag:248,height:1080,mimeType:'video/webm; codecs="vp09.00"'},{itag:313,height:2160,mimeType:'video/webm; codecs="vp9"'}]}};
+const choices=env.test.choices(data);assert(choices.some(f=>f.itag===134));assert(!choices.some(f=>f.itag===18||f.height>1080));assert(choices.length===3);assert(env.test.choices({...data,videoDetails:{videoId:'otherVideo1'}}).length===0);
+console.log('PASS: available format choices use real codec metadata, prefer the adaptive capture stream, ignore 2160p and stale video data.');
+// MAIN-world snapshots survive volume/visibility changes and missing DOM metadata.
+let mainVideo=new Element('video'),mainPlayer=new Element('player');Object.assign(mainVideo,{currentTime:NaN,duration:NaN,paused:false,ended:false,playbackRate:1});Object.assign(mainPlayer,{getPlayerState:()=>1,getCurrentTime:()=>3,getDuration:()=>6,getVideoData:()=>({video_id:saved.videoId}),getPlaybackQuality:()=> 'hd720'});
+const mainMessages=[],mainIntervals=[],docEvents={},mainHandlers={};const mainWindow={addEventListener:(n,f)=>mainHandlers[n]=f,postMessage:m=>mainMessages.push(m)};
+const main={window:mainWindow,location:ctx.location,document:{hidden:false,getElementById:()=>mainPlayer,querySelector:()=>mainVideo,addEventListener:(n,f)=>docEvents[n]=f},sessionStorage:ctx.sessionStorage,Uint8Array,ArrayBuffer,TextDecoder,URL,Number,Math,JSON,Set,setInterval:f=>mainIntervals.push(f),setTimeout:()=>0};vm.createContext(main);vm.runInContext(script('sabr_capture.js'),main);mainHandlers.message({source:mainWindow,origin:main.location.origin,data:{tag:'YTWIN7_SABR_CAPTURE_11_CONTROL',type:'start',session:saved.session,rate:4,height:720}});mainIntervals[0]();
+assert(mainMessages.at(-1).time===3&&mainMessages.at(-1).duration===6);mainVideo.emit('volumechange');assert(mainMessages.at(-1).state===1);
+main.document.hidden=true;docEvents.visibilitychange();assert(mainMessages.at(-1).hidden===true&&mainMessages.at(-1).state===1);
+assert(mainVideo.playbackRate===4);const playedVideo=mainVideo;mainVideo=null;mainPlayer=null;mainIntervals[0]();assert(mainMessages.at(-1).state===-1&&mainMessages.at(-1).time===-1);
+console.log('PASS: MAIN snapshots use player APIs when HTML metadata is NaN; volume and minimizing do not cancel; missing elements do not create a false end.');
+
+mainVideo=playedVideo;mainHandlers.message({source:mainWindow,origin:main.location.origin,data:{tag:'YTWIN7_SABR_CAPTURE_11_CONTROL',type:'stop',session:saved.session}});assert(mainVideo.playbackRate===1);console.log('PASS: capture speed 4x is applied in the player and the original speed is restored on stop.');
+const grouped=ctx.window.YTW7.byHeight([{height:720,itag:136,codec:'h264'},{height:720,itag:247,codec:'vp9'},{height:720,itag:398,codec:'av1'}]);assert(grouped.length===1&&grouped[0].codec==='auto'&&grouped[0].tagList==='136,247,398');console.log('PASS: three codec variants become one 720p button with an AUTO candidate list.');

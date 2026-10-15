@@ -1,0 +1,61 @@
+"""Check localized documentation and the reviewed release declaration."""
+from pathlib import Path
+from html.parser import HTMLParser
+from html import escape,unescape
+import argparse,hashlib,json,re,urllib.request,os
+ROOT=Path(__file__).resolve().parents[1]
+START='<!-- public-release:start -->';END='<!-- public-release:end -->'
+class Links(HTMLParser):
+ def __init__(self):super().__init__();self.values=[]
+ def handle_starttag(self,tag,attrs):self.values += [v for k,v in attrs if k in ('href','src') and v]
+def block(d,lang,html=False):
+ labels={'en':['Download Preview','User guide','Report a problem'],'ru':['Скачать Preview','Инструкция','Сообщить об ошибке'],'de':['Preview herunterladen','Anleitung','Problem melden']}[lang]
+ urls=[d['release_url'],d['help_url'].format(lang=lang),d['feedback_url']]
+ text=' · '.join(('<a href="'+escape(u)+'">'+escape(l)+'</a>') if html else '['+l+']('+u+')' for l,u in zip(labels,urls))
+ return START+'\n'+('<section class="guide"><strong>'+d['name']+' '+d['version']+' Preview</strong><p>'+text+'</p></section>' if html else '**'+d['name']+' '+d['version']+' Preview**\n\n'+text)+'\n'+END
+def generated(d):
+ out={}
+ for lang,names in d['readmes'].items():
+  for name in names:
+   s=(ROOT/name).read_text(encoding='utf-8');b=block(d,lang)
+   out[name]=re.sub(re.escape(START)+'.*?'+re.escape(END),lambda _:b,s,flags=re.S) if START in s else s.replace('\n','\n\n'+b+'\n',1)
+ for lang,name in d['guides'].items():
+  for target in [name,'docs/'+name]:
+   s=(ROOT/target).read_text(encoding='utf-8');b=block(d,lang,True)
+   out[target]=re.sub(re.escape(START)+'.*?'+re.escape(END),lambda _:b,s,flags=re.S) if START in s else s.replace('</header>','</header>\n'+b,1)
+ return out
+def fetch(url):
+ req=urllib.request.Request(url,headers={'User-Agent':'public-documentation-check'})
+ with urllib.request.urlopen(req,timeout=60) as response:return response.read()
+def main():
+ ap=argparse.ArgumentParser();ap.add_argument('--write',action='store_true');ap.add_argument('--online',action='store_true');ap.add_argument('--published',action='store_true');args=ap.parse_args();d=json.loads((ROOT/'public-release.json').read_text(encoding='utf-8'));errors=[]
+ for key in ('description','requirements','start'):
+  if set(d[key])!={'en','de','ru'}:errors.append('Incomplete languages: '+key)
+ for name,s in generated(d).items():
+  if args.write:(ROOT/name).write_text(s,encoding='utf-8')
+  elif (ROOT/name).read_text(encoding='utf-8')!=s:errors.append('Regenerate summary: '+name)
+ for item in d['version_files']:
+  match=re.search(item['pattern'],(ROOT/item['path']).read_text(encoding='utf-8'))
+  if not match or match[1]!=d['version']:errors.append('Version mismatch: '+item['path'])
+ if d['release_url']!=d['source_url']+'/releases/tag/'+d['tag']:errors.append('Release tag mismatch')
+ for p in [*ROOT.glob('*.html'),*(ROOT/'docs').glob('*.html')]:
+  s=p.read_text(encoding='utf-8');links=Links();links.feed(s)
+  for value in links.values:
+   if value.startswith(('#','https://','http://','mailto:','chrome:','edge:','browser:')):continue
+   target=p.parent/unescape(value.split('#')[0].split('?')[0])
+   if not target.exists():errors.append('Missing resource: '+p.name+' -> '+value)
+  for lang in ['en','de','ru']:
+   expected=('Guide-' if p.name.startswith('Guide') else 'index-')+lang+'.html'
+   if expected not in links.values:errors.append('Missing language link: '+p.name+' -> '+expected)
+ if args.online:
+  for a in d['assets']:
+   body=fetch(a['url'])
+   if len(body)!=a['size'] or hashlib.sha256(body).hexdigest()!=a['sha256']:errors.append('Published asset mismatch: '+a['name'])
+ if args.published:
+  for lang in ['en','de','ru']:
+   for key in ('website','guide'):
+    url=d['navigation'][lang][key];body=fetch(url).decode('utf-8')
+    if '<html lang="'+lang+'"' not in body or d['version'] not in body:errors.append('Published page mismatch: '+url)
+ if errors:raise SystemExit('\n'.join(errors))
+ print('Verified release versions, localized pages and resources'+(' and published files' if args.online else '')+'.')
+if __name__=='__main__':main()

@@ -1,0 +1,29 @@
+{
+  "ffmpeg": "5.1.6",
+  "lame": "3.100",
+  "toolchain": "llvm-mingw 20240619 MSVCRT x86_64 host / i686 target",
+  "target": "Windows 7 SP1 and newer; x86; SSE2",
+  "sources": [
+    {
+      "name": "ffmpeg-5.1.6.tar.xz",
+      "sha256": "f4fa066278f7a47feab316fef905f4db0d5e9b589451949740f83972b30901bd"
+    },
+    {
+      "name": "lame-3.100.tar.gz",
+      "sha256": "ddfe36cab873794038ae2c1210557ad34857a4b6bdc515785d1da9e175b1da1e"
+    },
+    {
+      "name": "llvm-mingw-20240619-msvcrt-x86_64.zip",
+      "sha256": "1b97bc55227bb69d81b011e39b09de53018f6c1dcfafeebb2bc50447d095af99"
+    }
+  ],
+  "upstream": [
+    "https://ffmpeg.org/releases/ffmpeg-5.1.6.tar.xz",
+    "https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz",
+    "https://github.com/mstorsjo/llvm-mingw/releases/tag/20240619"
+  ],
+  "binaries": {
+    "ffmpeg.exe": "831213e2c177bcdb990c052814fbbbbebd7f740208662ca35e1018ec0e731870",
+    "ffprobe.exe": "547cbfaae49f86b2cb6fe8271d4c63402efd0e52031501662b9cb8048b92ed7f"
+  }
+}

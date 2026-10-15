@@ -1,0 +1,3 @@
+dd5516ba3ad329611832b807f435ae5619999faefc99f74acb53bd9d958ca3aa  YouTubeDownloader-2.5.0-windows-full.zip
+d6232bb6e0ab397a1b76511293692286113203f2290cff046cae98cf6459858a  YouTubeDownloader-2.5.0-source.zip
+9e44f623e1fcb2604abaad9f98a692dfa5e4512d83aba3f19cb6c2469ab73b6f  YouTubeDownloader-2.5.0-corresponding-sources.zip

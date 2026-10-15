@@ -1,0 +1,32 @@
+name: Public documentation and extension checks
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '27 7 * * 1'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python tools/check_public_docs.py
+      - name: Extension regression tests
+        shell: python
+        run: |
+          import subprocess
+          from pathlib import Path
+          for test in sorted(Path('SOURCE/tests').glob('*.js')):
+              if test.name == 'test_sabr_background.js':
+                  continue
+              subprocess.run(['node', str(test)], check=True)
+      - name: Published pages and archives
+        if: github.event_name == 'schedule'
+        run: python tools/check_public_docs.py --online --published

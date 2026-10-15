@@ -1,0 +1,20 @@
+[
+  {
+    "package": "googlevideo",
+    "version": "4.1.1",
+    "archive": "googlevideo-4.1.1.tgz",
+    "sha256": "2f3385838ace8b339f6d224c0abd316787c0b28aab0b7566e08ce3f5cad37aba",
+    "npm_metadata": "https://registry.npmjs.org/googlevideo/4.1.1",
+    "publisher_sha512_integrity_verified": true,
+    "license": "MIT"
+  },
+  {
+    "package": "@bufbuild/protobuf",
+    "version": "2.12.0",
+    "archive": "bufbuild_protobuf-2.12.0.tgz",
+    "sha256": "92c333551b6687fabd3fd3686b452ae8b957a907150d5b8358489e260020750b",
+    "npm_metadata": "https://registry.npmjs.org/@bufbuild/protobuf/2.12.0",
+    "publisher_sha512_integrity_verified": true,
+    "license": "Apache-2.0 AND BSD-3-Clause"
+  }
+]
