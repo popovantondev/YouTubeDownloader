@@ -2,3 +2,5 @@
 *.cmd text eol=crlf
 *.png binary
 *.tgz binary
+licenses/** -whitespace
+encoder/evidence/** -whitespace

@@ -1,3 +1,3 @@
-@echo off
-cscript //nologo "%~dp0diagnose.js" %1
-pause
+@echo off
+cscript //nologo "%~dp0diagnose.js" %1
+pause

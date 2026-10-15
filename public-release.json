@@ -44,14 +44,14 @@
   "assets": [
     {
       "name": "YouTubeDownloader-2.5.0-windows-full.zip",
-      "size": 18143856,
-      "sha256": "dd5516ba3ad329611832b807f435ae5619999faefc99f74acb53bd9d958ca3aa",
+      "size": 18143849,
+      "sha256": "455a2f244be321b30becf51df0706baa08368ec1e2afd993470e64d9e024c462",
       "url": "https://github.com/popovantondev/YouTubeDownloader/releases/download/v2.5.0/YouTubeDownloader-2.5.0-windows-full.zip"
     },
     {
       "name": "YouTubeDownloader-2.5.0-source.zip",
-      "size": 1957156,
-      "sha256": "d6232bb6e0ab397a1b76511293692286113203f2290cff046cae98cf6459858a",
+      "size": 1957187,
+      "sha256": "16d21b0532a473afcedfd7e9a0862f9372aa763bf054a6e16a60487b466bc159",
       "url": "https://github.com/popovantondev/YouTubeDownloader/releases/download/v2.5.0/YouTubeDownloader-2.5.0-source.zip"
     },
     {
@@ -63,7 +63,7 @@
     {
       "name": "SHA256SUMS.txt",
       "size": 327,
-      "sha256": "4efa52230eb5104595ba8e5a8167d0a740d6bd47155d413816a46cdf632d7e9e",
+      "sha256": "31de0c411a5db0aecf324137d30eea393b2519ca6f5416a93c223c9375d866a5",
       "url": "https://github.com/popovantondev/YouTubeDownloader/releases/download/v2.5.0/SHA256SUMS.txt"
     }
   ],
