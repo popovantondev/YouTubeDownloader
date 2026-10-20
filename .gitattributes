@@ -4,3 +4,6 @@
 *.tgz binary
 licenses/** -whitespace
 encoder/evidence/** -whitespace
+
+# Generated FFmpeg build evidence is not application source.
+encoder/evidence/** linguist-generated
