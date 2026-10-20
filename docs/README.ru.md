@@ -1,7 +1,12 @@
-# YouTube Downloader + PeakMP3
+# YouTube Downloader
+
+**[Русский](README.ru.md) · [Deutsch](README.de.md) · [English](../README.md)**
+
+
+У PeakMP3 теперь отдельные [репозиторий](https://github.com/popovantondev/PeakMP3) и [сайт](https://popovantondev.github.io/PeakMP3/index-ru.html). Общий установщик 2.6.0 по-прежнему включает PeakMP3 0.16.0; ранее опубликованные архивы не изменены.
 
 <!-- public-release:start -->
-**YouTube Downloader + PeakMP3 2.6.0 Preview**
+**YouTube Downloader 2.6.0 Preview**
 
 [Скачать Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Инструкция](https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html) · [Сообщить об ошибке](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
@@ -39,3 +44,5 @@ YouTube может отказать с attestation required. Эта версия
 ## Исходники и права
 
 В SOURCE-KIT находятся исходники приложения и расширения, сборка и проверки. FFmpeg и FFprobe включены. Соответствующие исходники FFmpeg/LAME и параметры сборки — encoder, лицензии — licenses. Собственный код доступен для ознакомления, неизменённый выпуск — для личного использования; сторонние лицензии действуют отдельно. См. RIGHTS.md и THIRD_PARTY_NOTICES.md.
+
+**[Сайт · попробовать PeakMP3](https://popovantondev.github.io/YouTubeDownloader/index-ru.html)** · [PeakMP3 demo](https://popovantondev.github.io/PeakMP3/index-ru.html#demo)

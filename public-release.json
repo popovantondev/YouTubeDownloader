@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "name": "YouTube Downloader + PeakMP3",
+  "name": "YouTube Downloader",
   "repo": "YouTubeDownloader",
   "version": "2.6.0",
   "platform": "Windows 7 SP1 / 10 / 11 · x86 / x64",
@@ -117,6 +117,10 @@
     "de": "Preview-Einschränkung: YouTube kann eine Sitzungsbestätigung verlangen (attestation required) und den Originaldownload abbrechen. Kein automatischer Wiedergabemodus und keine Garantie vollständiger Downloads."
   },
   "desktop_version": "0.16.0",
-  "publication": "Preview release candidate; publication verified separately.",
-  "runtime_target": "Windows 7 SP1 x86, SSE2, .NET 3.5 / CLR2; configured CLR4 fallback"
+  "publication": "Published Preview; shared installer also contains PeakMP3 0.16.0.",
+  "runtime_target": "Windows 7 SP1 x86, SSE2, .NET 3.5 / CLR2; configured CLR4 fallback",
+  "bundled_applications": {
+    "YouTubeDownloader": "2.6.0",
+    "PeakMP3": "0.16.0"
+  }
 }
