@@ -1,5 +1,8 @@
 # YouTube Downloader
 
+**[Русский](README.ru.md) · [Deutsch](README.de.md) · [English](../README.md)**
+
+
 PeakMP3 hat jetzt ein eigenes [Repository](https://github.com/popovantondev/PeakMP3) und eine eigene [Website](https://popovantondev.github.io/PeakMP3/index-de.html). Das gemeinsame Setup 2.6.0 enthält weiterhin PeakMP3 0.16.0; veröffentlichte Archive bleiben unverändert.
 
 <!-- public-release:start -->
@@ -41,3 +44,5 @@ YouTube kann Originalstreams mit attestation required ablehnen. Diese Version be
 ## Quellen und Rechte
 
 SOURCE-KIT enthält Programm- und Erweiterungsquellen, Buildskripte und Prüfungen. FFmpeg/FFprobe sind enthalten. Passende FFmpeg/LAME-Quellarchive und Konfiguration liegen unter encoder, Lizenzen unter licenses. Eigener Code dient der Einsicht; unveränderte Programme dürfen privat genutzt werden. Drittanbieterbedingungen gelten separat. Siehe RIGHTS.md und THIRD_PARTY_NOTICES.md.
+
+**[Website · PeakMP3 testen](https://popovantondev.github.io/YouTubeDownloader/index-de.html)** · [PeakMP3 demo](https://popovantondev.github.io/PeakMP3/index-de.html#demo)
