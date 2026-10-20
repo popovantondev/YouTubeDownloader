@@ -61,9 +61,13 @@ def icon(name):return '<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS[name]
 def wave():return '<span class="wave-mark" aria-hidden="true">'+('<i></i>'*5)+'</span>'
 def path(page,lang):return ('index' if page=='home' else 'Guide' if page=='guide' else page)+'-'+lang+'.html'
 def nav(page,l):
- d=D[l];links=''.join('<a href="'+path(p,l)+'"'+(' aria-current="page"' if p==page else '')+'>'+e(label)+'</a>' for p,label in zip(['downloader','peakmp3','guide'],d['nav']))
+ d=D[l];links=''
+ for key,label in zip(['downloader','peakmp3','guide'],d['nav']):
+  url='https://popovantondev.github.io/PeakMP3/index-'+l+'.html' if key=='peakmp3' else path(key,l)
+  links+='<a href="'+url+'">'+e(label)+'</a>'
  languages=''.join('<a class="lang" href="'+path(page,x)+'" lang="'+x+'"'+(' aria-current="true"' if l==x else '')+'>'+x.upper()+'</a>' for x in ['ru','de','en'])
- return '<a class="skip" href="#content">'+e(d['skip'])+'</a><header class="site-nav"><a class="brand" href="'+path('home',l)+'" aria-label="PeakMP3 — '+e(d['nav'][0])+'">'+wave()+'<span>Peak<span class="word-orange">MP3</span></span></a><nav class="nav-links" id="site-menu" aria-label="Navigation">'+links+'</nav><nav class="languages" aria-label="Language">'+languages+'</nav><button class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="'+e(d['menu'])+'">'+icon('menu')+'</button></header>'
+ brand='<a class="brand" href="'+path('home',l)+'"><img class="downloader-brand-icon" src="extension/icons/icon48.png" width="43" height="43" alt=""><span>YouTube Downloader</span></a>'
+ return '<a class="skip" href="#content">'+e(d['skip'])+'</a><header class="site-nav">'+brand+'<nav class="nav-links" id="site-menu">'+links+'</nav><nav class="languages" aria-label="Language">'+languages+'</nav><button class="menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="'+e(d['menu'])+'">'+icon('menu')+'</button></header>'
 SETUP='YouTubeDownloader-PeakMP3-2.6.0-Preview-Setup.exe';ZIP='YouTubeDownloader-PeakMP3-2.6.0-Preview-FULL.zip'
 RELEASE='https://github.com/popovantondev/YouTubeDownloader/releases/download/v2.6.0/'
 def download(l,small=False):return '<a class="button primary'+(' small' if small else '')+'" data-download="setup" href="'+RELEASE+SETUP+'" download>'+icon('download')+e(D[l]['download'])+'</a>'
@@ -81,11 +85,11 @@ def footer(l):
 def feature_row(items):return '<div class="features">'+''.join('<article><span class="feature-number">0'+str(i+1)+'</span><h3>'+e(title)+'</h3><p>'+e(text)+'</p></article>' for i,(title,text) in enumerate(items))+'</div>'
 def home(l):
  d=D[l];return '<main id="content"><section class="hero"><div class="hero-copy reveal"><h1 class="hero-title">'+''.join('<span>'+e(x)+'</span>' for x in d['headline'])+'</h1><p class="suite-title">YouTube Downloader + PeakMP3</p><p class="lead">'+e(d['lead'])+'</p>'+plaque(l)+actions(l)+badges(l)+'</div>'+shot(l)+'</section></main><div class="wood-divider"></div>'+footer(l)
-def extension_frame(l):return '<div><div class="window-frame extension-frame"><div class="window-title">YouTube Downloader · 2.6.0</div><iframe src="website/extension-'+l+'.html" title="YouTube Downloader · '+l.upper()+'" loading="lazy"></iframe></div><p class="image-note">'+e(D[l]['downNote'])+'</p></div>'
+def extension_frame(l):return '<div><div class="window-frame extension-frame"><div class="window-title">YouTube Downloader · 2.6.0</div><iframe src="website/extension-'+l+'.html" title="YouTube Downloader · '+l.upper()+'" loading="eager" scrolling="no"></iframe></div><p class="image-note">'+e(D[l]['downNote'])+'</p></div>'
 def downloader(l):
  d=D[l]
  hero='<section class="hero product-hero"><div class="hero-copy"><p class="eyebrow">'+e(d['downKicker'])+'</p><h1 class="hero-title">'+''.join('<span>'+e(t)+'</span>' for t in d['downTitle'])+'</h1><p class="lead">'+e(d['downLead'])+'</p>'+actions(l)+badges(l)+'</div>'+extension_frame(l)+'</section>'
- body=feature_row(d['downFeatures'])+'<section class="section-row" id="formats"><div class="section-copy"><p class="section-kicker">144p — 1080p</p><h2>'+e(d['formatsTitle'])+'</h2><p>'+e(d['formatsText'])+'</p></div><div class="panel-card"><div class="format-badges"><span class="direct">360p · H.264</span><span class="direct">MP3 320</span><span>480p</span><span>720p</span></div><p>'+e(d['downFeatures'][0][1])+'</p></div></section><section class="section-row" id="audio"><div class="section-copy"><p class="section-kicker">AAC → PeakMP3</p><h2>'+e(d['audioTitle'])+'</h2><p>'+e(d['audioText'])+'</p><a class="button small" href="'+path('peakmp3',l)+'">PeakMP3 '+icon('arrow')+'</a></div><ul class="fact-list">'+''.join('<li>'+e(x)+'</li>' for x in d['audioBullets'])+'</ul></section><p class="notice">'+e(d['limitation'])+'</p>'
+ body=feature_row(d['downFeatures'])+'<section class="section-row" id="formats"><div class="section-copy"><p class="section-kicker">144p — 1080p</p><h2>'+e(d['formatsTitle'])+'</h2><p>'+e(d['formatsText'])+'</p></div><div class="panel-card"><div class="format-badges"><span class="direct">360p · H.264</span><span class="direct">MP3 320</span><span>480p</span><span>720p</span></div><p>'+e(d['downFeatures'][0][1])+'</p></div></section><section class="section-row" id="audio"><div class="section-copy"><p class="section-kicker">AAC → PeakMP3</p><h2>'+e(d['audioTitle'])+'</h2><p>'+e(d['audioText'])+'</p><a class="button small" href="https://popovantondev.github.io/PeakMP3/index-'+l+'.html">PeakMP3 '+icon('arrow')+'</a></div><ul class="fact-list">'+''.join('<li>'+e(x)+'</li>' for x in d['audioBullets'])+'</ul></section><p class="notice">'+e(d['limitation'])+'</p>'
  return '<main id="content">'+hero+'<div class="wood-divider"></div><div class="page-body">'+body+'</div></main>'+footer(l)
 def peak(l):
  d=D[l];hero='<section class="hero product-hero"><div class="hero-copy"><p class="eyebrow">'+e(d['peakKicker'])+'</p><h1 class="hero-title">'+''.join('<span>'+e(t)+'</span>' for t in d['peakTitle'])+'</h1><p class="lead">'+e(d['peakLead'])+'</p>'+actions(l)+badges(l)+'</div>'+shot(l)+'</section>'
@@ -97,18 +101,18 @@ def guide(l):
  content=''.join('<section id="'+a+'"><h2>'+e(b)+'</h2>'+c+'</section>' for a,b,c in zip(ids,names,sections))
  return '<main id="content"><header class="guide-title"><p class="section-kicker">'+e(d['guidePreview'])+'</p><h1>'+e(d['guideTitle'])+'</h1><p>'+e(d['guideLead'])+'</p></header><div class="page-body guide-layout"><nav class="guide-toc" aria-label="'+e(d['guideToc'])+'">'+toc+'</nav><div class="guide-content">'+content+'</div></div></main>'+footer(l)
 def page(kind,l):
- title='YouTube Downloader + PeakMP3' if kind=='home' else 'YouTube Downloader' if kind=='downloader' else 'PeakMP3' if kind=='peakmp3' else D[l]['nav'][2]+' — YouTube Downloader + PeakMP3'
- body={'home':home,'downloader':downloader,'peakmp3':peak,'guide':guide}[kind](l)
+ title='YouTube Downloader' if kind=='home' else 'YouTube Downloader' if kind=='downloader' else 'PeakMP3' if kind=='peakmp3' else D[l]['nav'][2]+' — YouTube Downloader + PeakMP3'
+ body={'home':downloader,'downloader':downloader,'peakmp3':peak,'guide':guide}[kind](l)
  alternatives=''.join('<link rel="alternate" hreflang="'+x+'" href="'+path(kind,x)+'">' for x in D)
- return '<!doctype html>\n<html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+e(D[l]['lead'])+'"><meta name="theme-color" content="#f4eddf"><meta name="application-version" content="2.6.0"><title>'+e(title)+'</title><link rel="icon" href="assets/site/peakmp3.svg"><link rel="stylesheet" href="website/site.css">'+alternatives+'<script defer src="website/site.js"></script>'+('<script defer src="website/demo.js"></script>' if kind=='peakmp3' else '')+'</head><body class="'+kind+'" data-lang="'+l+'" data-page="'+kind+'"><div class="site-shell"><div class="shell-inner">'+nav(kind,l)+body+'</div></div></body></html>\n'
+ return '<!doctype html>\n<html lang="'+l+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="'+e(D[l]['lead'])+'"><meta name="theme-color" content="#f4eddf"><meta name="application-version" content="2.6.0"><title>'+e(title)+'</title><link rel="icon" href="assets/site/peakmp3.svg"><link rel="stylesheet" href="website/site.css"><link rel="stylesheet" href="website/downloader.css">'+alternatives+'<script defer src="website/site.js"></script>'+('<script defer src="website/demo.js"></script>' if kind=='peakmp3' else '')+'</head><body class="downloader-site '+kind+'" data-lang="'+l+'" data-page="'+kind+'"><div class="site-shell"><div class="shell-inner">'+nav(kind,l)+body+'</div></div></body></html>\n'
 def extension_demo(l):
  s=(R/'extension/popup.html').read_text(encoding='utf-8-sig')
  stub='''<script>window.chrome={i18n:{getUILanguage:()=>'%s'},runtime:{lastError:null,getURL:p=>new URL('../extension/'+p,location.href).href,sendMessage:(m,cb)=>setTimeout(()=>cb({ok:false}),50)},storage:{onChanged:{addListener:()=>{}},local:{get:(k,cb)=>queueMicrotask(()=>cb({[k]:{language:'%s',theme:'light'}})),set:(x,cb)=>queueMicrotask(cb)}},tabs:{query:(q,cb)=>cb([]),sendMessage:(i,m,cb)=>cb()}};</script>'''%(l,l)
- return s.replace('<head>','<head><base href="../extension/">'+stub).replace('<body>','<body style="width:auto;min-width:0">')
+ return s.replace('<head>','<head><base href="../extension/">'+stub).replace('<body>','<body style="width:auto;min-width:0">').replace('</head>','<style>html{overflow:hidden}body{overflow:visible}</style></head>')
 def main():
  for l in D:
-  for kind in ['home','downloader','peakmp3','guide']:(R/path(kind,l)).write_text(page(kind,l),encoding='utf-8')
-  guide_copy=re.sub(r'(href|src)="((?:assets/|website/|index-|Guide-|downloader-|peakmp3-)[^"]*)"',r'\1="../\2"',(R/path('guide',l)).read_text(encoding='utf-8'))
+  for kind in ['home','downloader','peakmp3','guide']:(R/path(kind,l)).write_text(page(kind,l) if kind!='peakmp3' else '<!doctype html><html lang="'+l+'"><head><meta charset="utf-8"><title>PeakMP3</title><script>location.replace("https://popovantondev.github.io/PeakMP3/index-'+l+'.html"+location.hash);</script></head><body><a href="https://popovantondev.github.io/PeakMP3/index-'+l+'.html">PeakMP3</a></body></html>',encoding='utf-8')
+  guide_copy=re.sub(r'(href|src)="((?:assets/|website/|extension/|index-|Guide-|downloader-|peakmp3-)[^"]*)"',r'\1="../\2"',(R/path('guide',l)).read_text(encoding='utf-8'))
   (R/'docs'/path('guide',l)).write_text(guide_copy,encoding='utf-8')
   (W/('extension-'+l+'.html')).write_text(extension_demo(l),encoding='utf-8')
  (W/'strings.json').write_text(json.dumps({l:{k:D[l][k] for k in ['play','pause','stop','density','original','processed','demoPaused','demoPlaying']} for l in D},ensure_ascii=False),encoding='utf-8')

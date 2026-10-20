@@ -21,3 +21,24 @@
     });
   }
 })();
+
+// Fit the actual popup preview to its contents, including expanded settings.
+document.querySelectorAll('.extension-frame iframe').forEach(frame=>{
+ frame.addEventListener('load',()=>{
+  const body=frame.contentDocument?.body;if(!body)return;
+  const resize=()=>{frame.style.height=Math.ceil(body.getBoundingClientRect().height+2)+'px';};
+  new ResizeObserver(resize).observe(body);resize();
+ });
+});
+
+// Keep cross-product navigation inside the two local review sites.
+(() => {
+ if (!['127.0.0.1','localhost'].includes(location.hostname)) return;
+ for (const link of document.querySelectorAll('a[href]')) {
+  const url = new URL(link.href, location.href);
+  if (url.origin !== 'https://popovantondev.github.io') continue;
+  const target = url.pathname.match(/^\/(PeakMP3|YouTubeDownloader)\/(.*)$/);
+  if (!target) continue;
+  link.href = 'http://' + location.hostname + ':' + (target[1] === 'PeakMP3' ? '8768' : '8767') + '/' + target[2] + url.search + url.hash;
+ }
+})();

@@ -1,7 +1,9 @@
-# YouTube Downloader + PeakMP3
+# YouTube Downloader
+
+У PeakMP3 теперь отдельные [репозиторий](https://github.com/popovantondev/PeakMP3) и [сайт](https://popovantondev.github.io/PeakMP3/index-ru.html). Общий установщик 2.6.0 по-прежнему включает PeakMP3 0.16.0; ранее опубликованные архивы не изменены.
 
 <!-- public-release:start -->
-**YouTube Downloader + PeakMP3 2.6.0 Preview**
+**YouTube Downloader 2.6.0 Preview**
 
 [Скачать Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Инструкция](https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html) · [Сообщить об ошибке](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->

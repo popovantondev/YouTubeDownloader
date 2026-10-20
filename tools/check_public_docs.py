@@ -38,6 +38,10 @@ def main():
  if d['release_url']!=d['source_url']+'/releases/tag/'+d['tag']:errors.append('Release tag mismatch')
  for p in [*ROOT.glob('*.html'),*(ROOT/'docs').glob('*.html')]:
   s=p.read_text(encoding='utf-8');links=Links();links.feed(s)
+  if p.name.startswith('peakmp3-') and 'http-equiv="refresh"' in s:
+   lang=p.stem.split('-')[-1];destination='https://popovantondev.github.io/PeakMP3/index-'+lang+'.html'
+   if destination not in links.values or 'url='+destination not in s:errors.append('Incorrect product redirect: '+p.name)
+   continue
   for value in links.values:
    if value.startswith(('#','https://','http://','mailto:','chrome:','edge:','browser:')):continue
    target=p.parent/unescape(value.split('#')[0].split('?')[0])

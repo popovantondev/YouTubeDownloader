@@ -1,7 +1,9 @@
-# YouTube Downloader + PeakMP3
+# YouTube Downloader
+
+PeakMP3 hat jetzt ein eigenes [Repository](https://github.com/popovantondev/PeakMP3) und eine eigene [Website](https://popovantondev.github.io/PeakMP3/index-de.html). Das gemeinsame Setup 2.6.0 enthält weiterhin PeakMP3 0.16.0; veröffentlichte Archive bleiben unverändert.
 
 <!-- public-release:start -->
-**YouTube Downloader + PeakMP3 2.6.0 Preview**
+**YouTube Downloader 2.6.0 Preview**
 
 [Preview herunterladen](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Anleitung](https://popovantondev.github.io/YouTubeDownloader/Guide-de.html) · [Problem melden](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
