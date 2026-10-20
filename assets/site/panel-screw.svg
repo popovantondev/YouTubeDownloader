@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+ <defs>
+  <radialGradient id="well"><stop offset=".6" stop-color="#302a20"/><stop offset=".84" stop-color="#8a7b62"/><stop offset="1" stop-color="#e9dcc0"/></radialGradient>
+  <linearGradient id="rim" x2=".7" y2="1"><stop stop-color="#fff9e5"/><stop offset=".24" stop-color="#cec7af"/><stop offset=".55" stop-color="#968f79"/><stop offset="1" stop-color="#4e493e"/></linearGradient>
+  <linearGradient id="face" x2=".8" y2="1"><stop stop-color="#f5f0da"/><stop offset=".28" stop-color="#c6c2af"/><stop offset=".52" stop-color="#aaa792"/><stop offset=".77" stop-color="#c9c6b2"/><stop offset="1" stop-color="#77715e"/></linearGradient>
+ </defs>
+ <ellipse cx="14.5" cy="15" rx="11" ry="10.5" fill="#483b27" opacity=".23"/>
+ <circle cx="14" cy="14" r="11.7" fill="url(#well)"/>
+ <circle cx="14" cy="13.6" r="9.7" fill="url(#rim)" stroke="#544f42" stroke-width=".7"/>
+ <circle cx="14" cy="13.5" r="8.2" fill="url(#face)" stroke="#f2ead3" stroke-opacity=".6" stroke-width=".6"/>
+ <path d="M7.6 8.7a8 8 0 0 1 11.7-.2" fill="none" stroke="#fffcec" stroke-opacity=".7" stroke-width=".7"/>
+ <g transform="rotate(-32 14 14)"><path d="M7 12.7h14v2.9H7z" fill="#f2e8ce" opacity=".8"/><path d="M7.1 12.4h13.8v2.5H7.1z" fill="#514c3e"/><path d="M7.8 13h12.4v1.2H7.8z" fill="#27271f"/></g>
+</svg>

@@ -1,14 +1,22 @@
 'use strict';
 if(typeof importScripts==='function')importScripts('vendor/googlevideo.js');
 const b64=s=>{let raw='';for(const c of new TextEncoder().encode(s))raw+=String.fromCharCode(c);return btoa(raw);};
-function tell(tabId,videoId,message,progress,done){chrome.tabs.sendMessage(tabId,{type:'yt-win7-status',videoId,message,progress,done},()=>void chrome.runtime.lastError);}
-function context(m,sender){const page=new URL(sender.tab&&sender.tab.url||'');if(page.origin!=='https://www.youtube.com'||page.pathname!=='/watch'||page.searchParams.get('v')!==m.videoId||!/^[\w-]{11}$/.test(m.videoId))throw Error('Ролик не совпадает.');const duration=Number(m.duration);if(!Number.isSafeInteger(duration)||duration<1000||duration>21600000)throw Error('Неизвестна длительность ролика.');return {...m,title:String(m.title||m.videoId).replace(/[\\/:*?"<>|\u0000-\u001f]/g,'_').replace(/[. ]+$/g,'').slice(0,75),duration,tabId:sender.tab.id};}
-function nativeCall(m,onStatus=()=>{}){return new Promise((resolve,reject)=>{let finished=false;const port=chrome.runtime.connectNative('com.ytwin7.sabr');port.onMessage.addListener(r=>{if(r.action==='status')onStatus(r);if(r.action==='result'){finished=true;port.disconnect();r.ok?resolve(r):reject(Error(r.error||'Ошибка локального модуля'));}});port.onDisconnect.addListener(()=>{const e=chrome.runtime.lastError;if(!finished)reject(Error(e?e.message:'Локальный модуль отключён'));});port.postMessage(m);});}
-const identity=a=>({videoId:a.videoId,title:a.title,duration:a.duration});
-let mediaBusy=false;
+function tell(tabId,videoId,message,progress,done,operationId){chrome.tabs.sendMessage(tabId,{type:'yt-win7-status',videoId,message,progress,done,operationId},()=>void chrome.runtime.lastError);}
+function context(m,sender){const page=new URL(sender.tab&&sender.tab.url||'');if(page.origin!=='https://www.youtube.com'||page.pathname!=='/watch'||page.searchParams.get('v')!==m.videoId||!/^[\w-]{11}$/.test(m.videoId))throw Error('Ролик не совпадает.');const duration=Number(m.duration);if(!Number.isSafeInteger(duration)||duration<1000||duration>21600000)throw Error('Неизвестна длительность ролика.');return {...m,displayTitle:String(m.title||m.videoId).slice(0,512),language:/^(ru|de|en)$/.test(m.language)?m.language:'en',operationId:String(m.operationId||'').slice(0,80),title:String(m.title||m.videoId).replace(/[\\/:*?"<>|\u0000-\u001f]/g,'_').replace(/[. ]+$/g,'').slice(0,75),duration,tabId:sender.tab.id};}
+function nativeCall(m,onStatus=()=>{},task=null){return new Promise((resolve,reject)=>{let finished=false;const port=chrome.runtime.connectNative('com.ytwin7.sabr');if(task)task.cancel=()=>port.postMessage({action:'cancel'});port.onMessage.addListener(r=>{if(r.action==='status')onStatus(r);if(r.action==='result'){finished=true;port.disconnect();r.ok?resolve(r):reject(Error(r.error||'Ошибка локального модуля'));}});port.onDisconnect.addListener(()=>{const e=chrome.runtime.lastError;if(!finished)reject(Error(e?e.message:'Локальный модуль отключён'));});port.postMessage(m);});}
+const identity=a=>({videoId:a.videoId,title:a.title,duration:a.duration,displayTitle:a.displayTitle,language:a.language});
+let mediaBusy=false,mediaTask=null;
+chrome.runtime.onMessage.addListener((m,sender,reply)=>{
+ if(!m||!['desktopStatus','openDesktop','checkDesktop','cancelMedia'].includes(m.action))return;
+ const popup=sender.id===chrome.runtime.id&&String(sender.url||'').startsWith(chrome.runtime.getURL('popup.html'));
+ if(m.action==='openDesktop'&&!popup){reply({ok:false,error:'Not allowed'});return;}
+ if(!popup){try{context({...m,duration:m.duration||1000},sender);}catch(e){reply({ok:false,error:e.message});return;}}
+ if(m.action==='cancelMedia'){if(mediaTask&&mediaTask.videoId===m.videoId&&mediaTask.tabId===sender.tab?.id){mediaTask.cancelled=true;try{mediaTask.cancel?.();}catch(_){}}reply({ok:true});return;}
+ nativeCall({action:m.action==='openDesktop'?'openDesktop':'desktopStatus',language:m.language}).then(reply,e=>reply({ok:false,error:e.message}));return true;
+});
 async function reuse(a){const lookup=await nativeCall({action:'lookup',...identity(a)});if(lookup.cached&&(!a.aac||lookup.audioCodec==='aac'))return true;const candidates=await new Promise(resolve=>chrome.downloads.search({state:'complete',exists:true},items=>resolve(items||[])));const matching=candidates.filter(item=>{const name=item.filename.split(/[\\/]/).pop();return name===a.title+' [360p].mp4'||name===a.title+' ['+a.videoId+'] [360p].mp4';});for(const item of matching){try{await nativeCall({action:'import',...identity(a),input:b64(item.filename)});const imported=await nativeCall({action:'lookup',...identity(a)});if(!a.aac||imported.audioCodec==='aac')return true;}catch(_){}}return false;}
 chrome.runtime.onMessage.addListener((m,sender,reply)=>{
- if(!m||!['download360','downloadMP3','cachedMP3','downloadAAC','cachedAAC','downloadProgress'].includes(m.action))return;
+ if(!m||!['download360','downloadMP3','cachedMP3','downloadAAC','cachedAAC','downloadProcessedMP3','cachedProcessedMP3','downloadProgress'].includes(m.action))return;
  let a;try{a=context(m,sender);}catch(e){reply({ok:false,error:e.message});return;}
  if(m.action==='downloadProgress'){chrome.downloads.search({id:m.downloadId},items=>{const item=items&&items[0];reply(item?{ok:true,state:item.state,progress:item.totalBytes>0?Math.floor(item.bytesReceived/item.totalBytes*95):0}:{ok:false});});return true;}
  if(m.action==='download360'){
@@ -16,13 +24,13 @@ chrome.runtime.onMessage.addListener((m,sender,reply)=>{
   chrome.downloads.download({url:url.href,filename:a.title+' ['+a.videoId+'] [360p].mp4',conflictAction:'uniquify',saveAs:false},downloadId=>{const error=chrome.runtime.lastError;if(error||typeof downloadId!=='number'){reply({ok:false,error:error?error.message:'Загрузка не началась.'});return;}chrome.storage.local.set({['ytw7_360_'+downloadId]:identity(a)},()=>{reply({ok:true,downloadId});});});return true;
  }
  if(mediaBusy||globalThis.__ytw7BackgroundTransfer){reply({ok:false,error:'Дождись завершения текущей загрузки звука.'});return;}
- a.aac=['downloadAAC','cachedAAC'].includes(m.action);mediaBusy=true;let replied=false;
+ a.peak=['downloadProcessedMP3','cachedProcessedMP3'].includes(m.action);a.aac=a.peak||['downloadAAC','cachedAAC'].includes(m.action);mediaBusy=true;mediaTask=a;let replied=false;
  (async()=>{
-  try{if(['cachedMP3','cachedAAC'].includes(m.action)&&!await reuse(a)){mediaBusy=false;reply({ok:true,needsUrl:true});return;}
-   reply({ok:true});replied=true;
-   if(m.url)await browserMP3(a);else await nativeCall({action:a.aac?'aac':'mp3',...identity(a)},r=>tell(a.tabId,a.videoId,r.message,r.progress,false));
-   tell(a.tabId,a.videoId,a.aac?'Готово! Исходный AAC сохранён на рабочий стол в M4A.':'Готово! MP3 320 кбит/с сохранён на рабочий стол.',100,true);
-  }catch(e){tell(a.tabId,a.videoId,'Ошибка: '+e.message,0,true);if(!replied)reply({ok:false,error:e.message});}finally{mediaBusy=false;}
+  try{if(['cachedMP3','cachedAAC','cachedProcessedMP3'].includes(m.action)&&!await reuse(a)){mediaBusy=false;reply({ok:true,needsUrl:true});return;}
+   if(a.cancelled)throw Error('Отменено');reply({ok:true});replied=true;
+   if(m.url)await browserMP3(a);else await nativeCall({action:a.peak?'peak':a.aac?'aac':'mp3',...identity(a)},r=>tell(a.tabId,a.videoId,r.message,r.progress,false,a.operationId),a);
+   tell(a.tabId,a.videoId,a.peak?'AAC передан в PeakMP3. Проверьте плотность и сохраните MP3 в программе.':a.aac?'Готово! Исходный AAC сохранён на рабочий стол в M4A.':'Готово! MP3 320 кбит/с сохранён на рабочий стол.',100,true,a.operationId);
+  }catch(e){tell(a.tabId,a.videoId,'Ошибка: '+e.message,0,true,a.operationId);if(!replied)reply({ok:false,error:e.message});}finally{if(mediaTask===a)mediaTask=null;mediaBusy=false;}
  })();return true;
 });
 chrome.downloads.onChanged.addListener(change=>{if(!change.state||change.state.current!=='complete')return;const key='ytw7_360_'+change.id;chrome.storage.local.get(key,store=>{const a=store[key];if(!a)return;chrome.downloads.search({id:change.id},items=>{if(!items||!items[0])return;nativeCall({action:'import',...a,input:b64(items[0].filename)}).then(()=>chrome.storage.local.remove(key)).catch(()=>{});});});});
@@ -95,12 +103,13 @@ async function browserMP3(a){
  const url=new URL(a.url);if(url.protocol!=='https:'||!/(^|\.)googlevideo\.com$/i.test(url.hostname))throw Error('Неверная ссылка Googlevideo.');
  return new Promise((resolve,reject)=>{
   const port=chrome.runtime.connectNative('com.ytwin7.sabr'),abort=new AbortController();let finished=false,waiter=null,started=false;
-  const fail=e=>{if(finished)return;finished=true;abort.abort();if(waiter){clearTimeout(waiter.timer);waiter.reject(e);waiter=null;}try{port.disconnect();}catch(_){}reject(e);};
+  const fail=e=>{if(finished)return;finished=true;if(a.cancelled)e=Error('Отменено');abort.abort();if(waiter){clearTimeout(waiter.timer);waiter.reject(e);waiter=null;}try{port.disconnect();}catch(_){}reject(e);};
+  a.cancel=()=>{a.cancelled=true;try{port.postMessage({action:'cancel'});}catch(_){}abort.abort();setTimeout(()=>fail(Error('Отменено')),3000);};
   function ack(){return new Promise((resolveAck,rejectAck)=>{waiter={resolve:resolveAck,reject:rejectAck,timer:setTimeout(()=>fail(Error('Локальный приёмник не подтвердил запись фрагмента.')),30000)};});}
-  async function transfer(){let reader;try{const response=await fetch(url.href,{signal:abort.signal});if(!response.ok)throw Error('YouTube отклонил загрузку: HTTP '+response.status);if(!response.body)throw Error('Браузер не предоставил поток загрузки.');reader=response.body.getReader();const total=Number(response.headers.get('Content-Length'))||0;let count=0;for(;;){const chunk=await reader.read();if(chunk.done)break;for(let offset=0;offset<chunk.value.length;offset+=12288){const part=chunk.value.subarray(offset,offset+12288);let raw='';for(const b of part)raw+=String.fromCharCode(b);const confirmed=ack();port.postMessage({action:'mediaChunk',data:btoa(raw)});await confirmed;count+=part.length;}tell(a.tabId,a.videoId,'Получаю исходник '+(a.aac?'AAC':'MP3')+': '+Math.round(count/1024)+' КБ',total>0?Math.min(80,Math.floor(count/total*80)):0,false);}port.postMessage({action:'mediaFinish'});}catch(e){fail(e);}finally{if(reader)try{await reader.cancel();}catch(_){}}}
-  port.onMessage.addListener(m=>{if(m.action==='ready'&&!started){started=true;transfer();}else if(m.action==='mediaAck'&&waiter){const w=waiter;waiter=null;clearTimeout(w.timer);w.resolve();}else if(m.action==='status')tell(a.tabId,a.videoId,m.message,m.progress,false);else if(m.action==='result'){if(!m.ok){fail(Error(m.error||'Ошибка обработки звука'));return;}finished=true;port.disconnect();resolve(m);}});
+  async function transfer(){let reader;try{const response=await fetch(url.href,{signal:abort.signal});if(!response.ok)throw Error('YouTube отклонил загрузку: HTTP '+response.status);if(!response.body)throw Error('Браузер не предоставил поток загрузки.');reader=response.body.getReader();const total=Number(response.headers.get('Content-Length'))||0;let count=0;for(;;){const chunk=await reader.read();if(chunk.done)break;for(let offset=0;offset<chunk.value.length;offset+=12288){const part=chunk.value.subarray(offset,offset+12288);let raw='';for(const b of part)raw+=String.fromCharCode(b);const confirmed=ack();port.postMessage({action:'mediaChunk',data:btoa(raw)});await confirmed;count+=part.length;}tell(a.tabId,a.videoId,'Получаю исходник '+(a.aac?'AAC':'MP3')+': '+Math.round(count/1024)+' КБ',total>0?Math.min(80,Math.floor(count/total*80)):0,false,a.operationId);}port.postMessage({action:'mediaFinish'});}catch(e){if(!a.cancelled)fail(e);}finally{if(reader)try{await reader.cancel();}catch(_){}}}
+  port.onMessage.addListener(m=>{if(m.action==='ready'&&!started){started=true;transfer();}else if(m.action==='mediaAck'&&waiter){const w=waiter;waiter=null;clearTimeout(w.timer);w.resolve();}else if(m.action==='status')tell(a.tabId,a.videoId,m.message,m.progress,false,a.operationId);else if(m.action==='result'){if(!m.ok){fail(Error(m.error||'Ошибка обработки звука'));return;}finished=true;port.disconnect();resolve(m);}});
   port.onDisconnect.addListener(()=>{const error=chrome.runtime.lastError;if(!finished)fail(Error(error?error.message:'Локальный приёмник отключён'));});
-  port.postMessage({action:a.aac?'aacstream':'mp3stream',...identity(a)});
+  port.postMessage({action:a.peak?'peakstream':a.aac?'aacstream':'mp3stream',...identity(a)});
  });
 }
 

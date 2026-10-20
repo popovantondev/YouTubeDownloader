@@ -1,6 +1,5 @@
 @echo off
-setlocal
-cscript //nologo "%~dp0setup.js" uninstall %1
+"%~dp0InstallerEngine.exe" uninstall %1
 set "RESULT=%errorlevel%"
 pause
 exit /b %RESULT%

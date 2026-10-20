@@ -11,7 +11,9 @@ var f=fso.CreateTextFile(dest,true,false);
 f.Write('{"name":"com.ytwin7.sabr","description":"SABR local media assembly","path":"'+esc(exe)+'","type":"stdio","allowed_origins":["chrome-extension://'+id+'/"]}');
 f.Close();
 var paths=['Microsoft\\Edge','Google\\Chrome','Chromium','Yandex\\YandexBrowser','Yandex\\YandexBrowserStable'];
+var testPrefix=sh.Environment('PROCESS')('YTD_INSTALL_TEST_REGISTRY');
+if(testPrefix&&!/^Software\\popovantondev\\YouTubeDownloader\\Tests\\[A-Za-z0-9_-]+\\$/.test(testPrefix))throw Error('Invalid isolated test registry.');
 for(var i=0;i<paths.length;i++){
- try{sh.RegWrite('HKCU\\Software\\'+paths[i]+'\\NativeMessagingHosts\\com.ytwin7.sabr\\',dest,'REG_SZ');}catch(e){}
+ try{sh.RegWrite('HKCU\\'+(testPrefix||'Software\\')+paths[i]+'\\NativeMessagingHosts\\com.ytwin7.sabr\\',dest,'REG_SZ');}catch(e){}
 }
 WScript.Echo('SABR native host registered for extension '+id);

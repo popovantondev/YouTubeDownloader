@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   'use strict';
   if (window.__YT_WIN7_ANDROID_03__) return;
   window.__YT_WIN7_ANDROID_03__ = true;
@@ -12,7 +12,7 @@
       direct: typeof f.url === 'string' && f.url.startsWith('https://'),
       ciphered: !!(f.signatureCipher || f.cipher) };
   }
-  async function probe(videoId, download) {
+  async function probe(videoId, download, audioOnly) {
     let key = '';
     try { key = String(window.ytcfg?.get?.('INNERTUBE_API_KEY') || ''); } catch (_) {}
     if (!key || !/^[A-Za-z0-9_-]{20,100}$/.test(key))
@@ -47,13 +47,14 @@
       /^video\/mp4/i.test(String(f.mimeType||'')) &&
       /avc1/i.test(String(f.mimeType||'')) &&
       /mp4a/i.test(String(f.mimeType||'')));
-    const selected = candidates[0] || null;
+    const audio=adaptive.filter(f=>typeof f.url==='string'&&/^audio\/mp4/i.test(String(f.mimeType||''))&&/mp4a/i.test(String(f.mimeType||''))).sort((a,b)=>(Number(b.bitrate)||0)-(Number(a.bitrate)||0));
+    const selected = audioOnly?(audio[0]||candidates[0]||null):(candidates[0]||null);
     const result={ok:true,playability:String(data.playabilityStatus?.status||'unknown'),
       reason:String(data.playabilityStatus?.reason||'').slice(0,180),
       progressive:progressive.map(frameFormat),adaptiveCount:adaptive.length,
       sabrOnly:!progressive.some(f=>typeof f.url==='string'&&f.url.startsWith('https://')) &&
         !!sd.serverAbrStreamingUrl,
-      direct360:!!selected,
+      direct360:!!candidates[0],audioOnly:audioOnly&&audio.includes(selected),duration:Number(data.videoDetails?.lengthSeconds)*1000,
       canDownload:false};
     if(download && selected) {
       try {
@@ -73,7 +74,7 @@
        typeof data.id!=='string' || !/^[A-Za-z0-9_\-]{8,80}$/.test(data.id))return;
     const v=new URL(location.href).searchParams.get('v');
     if(!v || !/^[a-zA-Z0-9_-]{11}$/.test(v))return;
-    const result=await probe(v,!!data.download);
+    const result=await probe(v,!!data.download,!!data.audioOnly);
     window.postMessage({source:RESPONSE,id:data.id,videoId:v,result},location.origin);
   });
 })();

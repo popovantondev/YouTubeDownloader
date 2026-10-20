@@ -24,9 +24,14 @@ jobs:
           import subprocess
           from pathlib import Path
           for test in sorted(Path('SOURCE/tests').glob('*.js')):
-              if test.name == 'test_sabr_background.js':
+              # 2.5 WSH installer simulation is obsolete: the shipped installer
+              # now uses InstallerEngine. Its real isolated Windows checks
+              # are tests/test_installer260.py; results are in CHECKS-260.md.
+              if test.name in ('test_sabr_background.js', 'test_install.js'):
                   continue
               subprocess.run(['node', str(test)], check=True)
+      - name: Combined desktop routing checks
+        run: node tests/test_extension260.js
       - name: Published pages and archives
         if: github.event_name == 'schedule'
         run: python tools/check_public_docs.py --online --published

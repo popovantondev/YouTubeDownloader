@@ -23,7 +23,8 @@
     "https://github.com/mstorsjo/llvm-mingw/releases/tag/20240619"
   ],
   "binaries": {
-    "ffmpeg.exe": "831213e2c177bcdb990c052814fbbbbebd7f740208662ca35e1018ec0e731870",
-    "ffprobe.exe": "547cbfaae49f86b2cb6fe8271d4c63402efd0e52031501662b9cb8048b92ed7f"
-  }
+    "ffmpeg.exe": "e98fe0e136c2894e12e3b2b81c43662e95aa274f347b9673b61500ca4af4d06c",
+    "ffprobe.exe": "85bc6f4c71de894199e7ffe11d4b936b7b81f9aaa17300053197536dc4c56e5c"
+  },
+  "purpose": "2.6.0 / PeakMP3 0.16.0: AAC copy, plain MP3, existing density DSP, waveform and float preview"
 }

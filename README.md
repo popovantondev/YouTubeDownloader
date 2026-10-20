@@ -1,60 +1,41 @@
-# YouTube Downloader
+# YouTube Downloader + PeakMP3
 
 <!-- public-release:start -->
-**YouTube Downloader 2.5.0 Preview**
+**YouTube Downloader + PeakMP3 2.6.0 Preview**
 
-[Download Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.5.0) · [User guide](https://popovantondev.github.io/YouTubeDownloader/Guide-en.html) · [Report a problem](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
+[Download Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [User guide](https://popovantondev.github.io/YouTubeDownloader/Guide-en.html) · [Report a problem](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
 
-[English](https://github.com/popovantondev/YouTubeDownloader#readme) · [Русский](https://github.com/popovantondev/YouTubeDownloader/blob/main/docs/README.ru.md) · [Deutsch](https://github.com/popovantondev/YouTubeDownloader/blob/main/docs/README.de.md)
+Preview 2.6.0 + PeakMP3 0.16.0
 
-Save YouTube video and audio on Windows. Choose the buttons you want; download original streams while the video stays paused.
+## Install without administrator rights
 
-**Windows · x86/x64 · Preview 2.5.0 · RU / DE / EN**
+Run YouTubeDownloader-PeakMP3-2.6.0-Preview-Setup.exe. The installer puts the desktop program, native host, extension files, media tools and offline guides into your user profile. Close PeakMP3 and ongoing downloads before upgrading. Browser connection remains a separate guided action in each browser profile.
 
-Preview limitation: YouTube may require session verification (attestation required) and stop an original-quality download. No playback fallback or complete-download guarantee is provided.
+## Connect a browser
 
-[Download Preview 2.5.0](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.5.0) · [User guide](https://popovantondev.github.io/YouTubeDownloader/Guide-en.html) · [Report a problem](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
+In the connection wizard choose Chrome, Edge or Yandex and open its extension management page. Enable Developer mode, choose Load unpacked and select the extension folder shown by the wizard. Pin the green arrow. Refresh existing YouTube tabs. The popup should show PeakMP3 connected. Managed browser policies may prohibit unpacked extensions; the installer does not change them.
 
-![YouTube Downloader](assets/screenshots/chrome-popup-en-light.png)
+## Choose how to get MP3
 
-Actual extension page in Chrome 155 with demonstration settings; automated UI check, not a download or a Windows 7 test.
+The green MP3 button keeps its normal, unprocessed MP3 action. Its arrow opens two choices: download MP3 without processing, or download AAC and open PeakMP3. The second path copies original AAC to the private inbox, then opens it in PeakMP3 without autoplay. Listen, adjust density and export there. It does not silently produce a finished processed MP3. The save dialog starts at Desktop and lets you choose another location.
 
-## Installation
+## Formats and language
 
-1. Extract the entire release ZIP to a writable folder. Check SHA256SUMS.txt. Browser, Windows and the system .NET runtime are prerequisites.
-2. Close YouTube tabs and run Install.cmd normally, without administrator rights. Optional language: Install.cmd en, ru or de.
-3. Open edge://extensions, chrome://extensions or browser://extensions. Enable Developer mode and choose Load unpacked.
-4. Select %LOCALAPPDATA%\YTWin7_360_MP3\extension. For an existing installation, reload the extension and YouTube page.
-5. Pin the green arrow icon to the toolbar. Click it to choose language, theme and visible formats. Start with 480p.
+The green browser arrow opens settings. Default visible formats are green quick 360p and MP3, brown original 480p and 720p. Other qualities and original AAC can be enabled there. Language RU/DE/EN and visibility are saved per browser profile. PeakMP3 has its own language selection; an incoming job sets the initial language only on first launch. Downloads default to without playback.
 
-## A compact panel
+## Windows 7 and weak computers
 
-Green: quick H.264 360p, MP3 and original AAC. Brown: original video qualities. By default, only 360p, MP3, 480p and 720p appear. Configure everything from the browser toolbar icon.
+Windows 7 SP1 32-bit with SSE2 remains a required target. Both managed applications target x86 .NET Framework 3.5 / CLR2; configurations allow CLR4 on newer Windows. FFmpeg is a static x86 MSVCRT build. No .NET 4.8, WebView2 or x64-only runtime is required. System Windows, a compatible browser and a usable .NET runtime are prerequisites. The installer does not enable Windows features. The user reports successful use on Windows 11 with current Chrome and on Windows 7 with the last compatible Yandex and Chrome (reported approximately as 109). Exact versions and complete installation/download/handoff/export scenarios were not recorded. This is a user report, separate from the local automated checks. Windows 10 has not been separately tested. See the checks file.
 
-## Without playback
+## Upgrade, recovery and uninstall
 
-The browser downloads media in the background; the page stays paused. Video and AAC are copied without re-encoding. MP3 320 kbit/s is converted audio and cannot improve its source.
+The existing extension ID, native host, install path, settings key and audio cache are retained. Setup snapshots the prior files and registrations before replacing them. Restore_previous.cmd restores BACKUP_PRE_260 when present. Uninstall through Windows Apps removes owned program files and registration, retaining settings, audio cache, inbox audio and downloads. Remove the extension separately from each browser profile. Do not manually delete user folders.
 
-## Designed for Windows 7
+## Known limits and checks
 
-Originally created for Windows 7 and low-powered computers. The native component targets .NET Framework 3.5 / CLR2, with configured CLR4 fallback for modern Windows. Windows 10/11 and compatible older/newer Chromium browsers are intended targets; see the exact test matrix.
+YouTube can refuse original streams with attestation required. This candidate does not claim to fix that refusal and never switches to playback automatically. AAC handoff requires an accessible AAC source; Opus is not relabelled AAC. Test results are in docs/CHECKS-260.md. Synthetic media and simulated browser tests do not establish successful live downloads or every-browser compatibility.
 
-## Compatibility and checks
+## Sources and rights
 
-2.5.0 on Windows 11: Chrome 155.0.8059.80 and Edge 155.0.4283.45 passed menu/settings tests and actual Native Messaging registration/host communication in isolated browser profiles. A staged current-user install, upgrade from 2.4.2, restore and integration removal passed. Local media tests cover 144–1080p, AAC, Opus and MP3 with packet preservation checks. The live Edge 480p attempt stopped on YouTube session verification; a complete live download is not confirmed in that test. Fresh Windows 7, Windows 10 and current Yandex have not been independently tested with 2.5.0. The earlier 2.4.2 was reported working on reset Windows 7 with Yandex 24.10.4.850 and on Windows 11.
-
-## Limitations
-
-Preview: YouTube can change delivery protocols or reject a stream. Supported choices are 144–1080p; only available qualities appear. Live streams, playlists, DRM, Vimeo and other sites are not supported. Signed URLs may expire; autonomous token refresh is not implemented. A 320 kbit/s MP3 is not higher-quality than its source. The release is unsigned.
-
-## Files and removal
-
-Original-quality MP4, MP3 and AAC/M4A are saved on Desktop. Quick 360p uses the browser download destination. Audio cache and temporary files use LocalAppData. Uninstall.cmd removes only browser integration; downloads, cache and application files are preserved. Remove the extension separately from the browser.
-
-## Rights and components
-
-Application source is published for educational and portfolio inspection, not under an open-source license. Individuals may run an unmodified released binary for personal use. FFmpeg, LAME, googlevideo and protobuf retain separate licenses and corresponding-source provisions. See RIGHTS.md and THIRD_PARTY_NOTICES.md.
-
-
-Upgrade recovery: the first existing installation is backed up with its extension, native component, FFmpeg/FFprobe and registration under %LOCALAPPDATA%\YTWin7_WatchCapture\BACKUP_PRE_250. Close YouTube tabs, run Restore_previous.cmd from this kit and reload the extension to restore it. A failed installation attempts to restore its own transaction snapshot. Uninstall.cmd preserves application files and audio cache.
+SOURCE-KIT contains application sources, extension sources, build scripts and checks. Runtime FFmpeg and FFprobe are included. Matching FFmpeg/LAME source archives and build configuration are in encoder, with licenses in licenses. Own code may be inspected and the unmodified release used personally; third-party terms apply separately. See RIGHTS.md and THIRD_PARTY_NOTICES.md.

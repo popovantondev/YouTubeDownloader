@@ -38,11 +38,11 @@ Programs:
 ffmpeg                  ffprobe
 
 Enabled decoders:
-aac                     mp3float                pcm_s24le
-aac_fixed               opus                    pcm_s32le
-aac_latm                pcm_f32le               vp9
+aac                     mp3                     pcm_s16le
+aac_fixed               mp3float                pcm_s24le
+aac_latm                opus                    pcm_s32le
+flac                    pcm_f32le               vp9
 h264                    pcm_f64le
-mp3                     pcm_s16le
 
 Enabled encoders:
 libmp3lame              pcm_s16le
@@ -51,29 +51,33 @@ pcm_f32le               pcm_s24le
 Enabled hwaccels:
 
 Enabled parsers:
-aac                     av1                     opus
-aac_latm                h264                    vp9
-ac3                     mpegaudio
+aac                     av1                     mpegaudio
+aac_latm                flac                    opus
+ac3                     h264                    vp9
 
 Enabled demuxers:
-aac                     matroska                ogg
-concat                  mov                     wav
+aac                     ivf                     obu
+concat                  matroska                ogg
+flac                    mov                     wav
 h264                    mp3
-ivf                     obu
 
 Enabled muxers:
-adts                    mov                     null
-ipod                    mp3                     wav
-matroska                mp4
+adts                    mp3                     pcm_s16le
+ipod                    mp4                     wav
+matroska                null
+mov                     pcm_f32le
 
 Enabled protocols:
 concat                  file                    pipe
 
 Enabled filters:
-aformat                 atrim                   null
-anull                   concat                  transpose
-aresample               format                  trim
-asetpts                 hflip                   vflip
+acompressor             asetpts                 null
+aformat                 asplit                  transpose
+alimiter                astats                  trim
+amerge                  atrim                   vflip
+amix                    concat                  volume
+anull                   format
+aresample               hflip
 
 Enabled bsfs:
 aac_adtstoasc           h264_mp4toannexb        vp9_superframe_split
@@ -85,16 +89,16 @@ Enabled indevs:
 Enabled outdevs:
 
 License: LGPL version 2.1 or later
-
-WARNING: pkg-config not found, library detection may fail.
-config_components.h is unchanged
-libavutil/avconfig.h is unchanged
-libavfilter/filter_list.c is unchanged
-libavcodec/codec_list.c is unchanged
-libavcodec/parser_list.c is unchanged
-libavcodec/bsf_list.c is unchanged
-libavformat/demuxer_list.c is unchanged
-libavformat/muxer_list.c is unchanged
-libavdevice/indev_list.c is unchanged
-libavdevice/outdev_list.c is unchanged
-libavformat/protocol_list.c is unchanged
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
+./configure: line 1687: cmp: command not found
