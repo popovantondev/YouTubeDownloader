@@ -14,3 +14,13 @@ encoder/sources/
 SOURCE/vendor/build-tree/
 
 !SOURCE/vendor/*.tgz
+
+.payload/
+.bundle260/
+.test-artifacts/
+dist/
+.*-checks.log
+.installer-build.log
+encoder/build/
+encoder/prefix/
+encoder/build-260.log

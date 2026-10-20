@@ -1,21 +1,21 @@
-# 2.5.0 Preview
+# 2.6.0 Preview + PeakMP3 0.16.0
 
 ## Changes
 
-New name and green icon; toolbar-only settings with per-format switches; RU/DE/EN and light/dark themes. Explicit Edge Native Messaging registration; x86 CLR2 host and existing paths preserved. Minimal FFmpeg/FFprobe 5.1.6 with pinned corresponding sources and licenses. Installer backup, automatic recovery and manual restore. The default remains without playback; no automatic playback fallback.
+Combined installer for YouTube Downloader 2.6.0 Preview and PeakMP3 0.16.0. Download plain MP3 or transfer original AAC into the PeakMP3 queue without autoplay. RU/DE/EN website in cream, wood and metal with a separate silent control demonstration.
 
-## Compatibility and checks
-2.5.0 on Windows 11: Chrome 155.0.8059.80 and Edge 155.0.4283.45 passed menu/settings tests and actual Native Messaging registration/host communication in isolated browser profiles. A staged current-user install, upgrade from 2.4.2, restore and integration removal passed. Local media tests cover 144–1080p, AAC, Opus and MP3 with packet preservation checks. The live Edge 480p attempt stopped on YouTube session verification; a complete live download is not confirmed in that test. Fresh Windows 7, Windows 10 and current Yandex have not been independently tested with 2.5.0. The earlier 2.4.2 was reported working on reset Windows 7 with Yandex 24.10.4.850 and on Windows 11.
+## Compatibility
+
+Required target: Windows 7 SP1, 32 bit, SSE2, .NET 3.5 / CLR2; CLR4 fallback on newer Windows. Local checks ran on Windows 11. The user reports current Chrome on Windows 11 and compatible Yandex/Chrome (approximately 109) on Windows 7; exact builds and full scenarios were not recorded. Windows 10 is not separately tested. See CHECKS-260.md.
 
 ## Installation
-Extract the entire release ZIP to a writable folder. Check SHA256SUMS.txt. Browser, Windows and the system .NET runtime are prerequisites.
-Close YouTube tabs and run Install.cmd normally, without administrator rights. Optional language: Install.cmd en, ru or de.
-Open edge://extensions, chrome://extensions or browser://extensions. Enable Developer mode and choose Load unpacked.
-Select %LOCALAPPDATA%\YTWin7_360_MP3\extension. For an existing installation, reload the extension and YouTube page.
-Pin the green arrow icon to the toolbar. Click it to choose language, theme and visible formats. Start with 480p.
+
+Run the combined Setup.exe without administrator rights or extract the complete ZIP. Close PeakMP3 and active downloads before updating. Use the wizard to connect the unpacked extension separately in each Chrome, Edge or Yandex profile. Existing extension ID, settings and audio cache are retained.
 
 ## Limitations
-Preview: YouTube can change delivery protocols or reject a stream. Supported choices are 144–1080p; only available qualities appear. Live streams, playlists, DRM, Vimeo and other sites are not supported. Signed URLs may expire; autonomous token refresh is not implemented. A 320 kbit/s MP3 is not higher-quality than its source. The release is unsigned.
 
-## SHA-256
-SHA256SUMS.txt
+Preview: attestation required refusals remain unresolved. Playback does not start automatically. The full live browser/format matrix, Windows 10 and an agent-run Windows 7 test remain unverified. Synthetic tests do not establish music sound quality or exact AIMP VU matching. DRM, Vimeo, other websites, livestreams and playlists are out of scope. Executables are unsigned.
+
+## Checksums
+
+Exact file sizes and SHA-256 values are in public-release.json and this release’s SHA256SUMS.txt. The full ZIP includes programs, application sources, FFmpeg/FFprobe, matching component sources, licenses and offline guides.

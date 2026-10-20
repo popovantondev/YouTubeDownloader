@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
 let output='',writes=[];const root='C:\\Users\\Пользователь 😀\\AppData\\Local';
-const sh={ExpandEnvironmentStrings:()=>root,RegWrite:(...x)=>writes.push(x)};
+const sh={Environment:()=>()=>'',ExpandEnvironmentStrings:()=>root,RegWrite:(...x)=>writes.push(x)};
 const fso={CreateTextFile:()=>({Write:s=>output+=s,Close:()=>{}})};
 const ctx={WScript:{CreateObject:name=>name==='WScript.Shell'?sh:fso,Echo:()=>{}}};
 vm.createContext(ctx);vm.runInContext(fs.readFileSync(path.join(__dirname,'../../register_sabr_host.js'),'utf8'),ctx);

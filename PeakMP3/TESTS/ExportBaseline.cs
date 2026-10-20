@@ -1,0 +1,2 @@
+using System;using System.IO;using System.ComponentModel;
+namespace PeakMp3Win7{internal class ExportBaseline{static int Main(string[] a){try{JobOptions j=new JobOptions();j.Inputs=new string[]{a[0]};j.DenseStrength=int.Parse(a[1]);j.DenseMode=true;j.OutputFolder=a[2];new ProcessingEngine(a[3],new BackgroundWorker(),delegate(string k,string v){Console.WriteLine(k+" "+v);}).Convert(j);return 0;}catch(Exception e){Console.Error.WriteLine(e);return 1;}}}}

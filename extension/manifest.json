@@ -1,7 +1,7 @@
-{
+﻿{
   "manifest_version": 3,
   "name": "YouTube Downloader",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "__MSG_description__",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzO8qAv5V6b6FeMdYJDUD3M43ud0++Yy56nEp3JU996lJRjtxHDfEAvl+aR/JNmjjwWKgmXfJtICTCIW1ZSg2I5Pd/G8S6ogWkBA7VyHRD73h79n5qpwYeC4uaRNfXafM+kuYxiiS7F5hhOZH78649Yp0lwj24P6TmJJCmFCfioU80BmK/MMPfBNFAgTQMInQ+gKIjiFdYXa7JnjxgtkFy47iQQEQwKt/T0sivv801uedL17SlIUYBCsvfbjJiZpej2paY4P/NwF5yi/NBqlkRWClFgYrQJ6j2d2krEbHKsCbe99q40uFFZd3tmYaPV5vw3FbArV7DzLofim9hod2ZwIDAQAB",
   "permissions": [

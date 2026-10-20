@@ -4,7 +4,7 @@ set -euo pipefail
 export PATH="/usr/bin:$PATH"
 cd "$(dirname "$0")"
 root="$PWD"
-export PATH="$root/llvm-mingw-20240619-msvcrt-x86_64/bin:/usr/bin:$PATH"
+export PATH="${YTD_TOOLCHAIN_PATH:-$root/llvm-mingw-20240619-msvcrt-x86_64}/bin:$PATH"
 prefix="$root/prefix"
 mkdir -p build evidence "$prefix"
 export CC=i686-w64-mingw32-clang CXX=i686-w64-mingw32-clang++ AR=llvm-ar RANLIB=llvm-ranlib
@@ -32,12 +32,12 @@ cd build/ffmpeg-5.1.6
  --disable-doc --disable-debug --disable-x86asm --disable-asm --disable-ffplay --enable-ffmpeg --enable-ffprobe \
  --disable-w32threads --enable-pthreads --enable-libmp3lame \
  --enable-avcodec --enable-avformat --enable-avfilter --enable-swresample --enable-swscale \
- --enable-protocol=file,pipe,concat --enable-demuxer=mov,matroska,mp3,aac,ogg,wav,concat,h264,ivf,obu \
- --enable-muxer=mp4,ipod,matroska,mp3,adts,null,wav \
- --enable-decoder=aac,aac_fixed,aac_latm,opus,mp3,mp3float,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,h264,vp9 \
+ --enable-protocol=file,pipe,concat --enable-demuxer=mov,matroska,mp3,aac,ogg,wav,flac,concat,h264,ivf,obu \
+ --enable-muxer=mp4,ipod,matroska,mp3,adts,null,wav,pcm_f32le,pcm_s16le \
+ --enable-decoder=flac,aac,aac_fixed,aac_latm,opus,mp3,mp3float,pcm_s16le,pcm_s24le,pcm_s32le,pcm_f32le,pcm_f64le,h264,vp9 \
  --enable-encoder=libmp3lame,pcm_s16le,pcm_s24le,pcm_f32le \
- --enable-parser=aac,aac_latm,mpegaudio,opus,h264,vp9,av1 \
- --enable-filter=aresample,anull,aformat,atrim,asetpts,concat \
+ --enable-parser=flac,aac,aac_latm,mpegaudio,opus,h264,vp9,av1 \
+ --enable-filter=aresample,anull,aformat,atrim,asetpts,concat,astats,volume,acompressor,alimiter,asplit,amerge,amix \
  --enable-bsf=aac_adtstoasc,extract_extradata,h264_mp4toannexb,av1_frame_merge > "$root/evidence/ffmpeg-configure.txt" 2>&1
 cp config.h ffbuild/config.mak ffbuild/config.log "$root/evidence/"
 make -j4 > "$root/evidence/ffmpeg-make.txt" 2>&1

@@ -1,3 +1,5 @@
 @echo off
-cscript //nologo "%~dp0setup.js" restore %1
-if errorlevel 1 pause
+"%~dp0InstallerEngine.exe" restore %1
+set "RESULT=%errorlevel%"
+pause
+exit /b %RESULT%
