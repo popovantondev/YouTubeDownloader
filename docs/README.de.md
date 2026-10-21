@@ -2,16 +2,13 @@
 
 **[Русский](README.ru.md) · [Deutsch](README.de.md) · [English](../README.md)**
 
-
-PeakMP3 hat jetzt ein eigenes [Repository](https://github.com/popovantondev/PeakMP3) und eine eigene [Website](https://popovantondev.github.io/PeakMP3/index-de.html). Das gemeinsame Setup 2.6.0 enthält weiterhin PeakMP3 0.16.0; veröffentlichte Archive bleiben unverändert.
+YouTube-Videos und Audio unter Windows herunterladen. Formate und sichtbare Schaltflächen lassen sich in der Browser-Erweiterung auswählen.
 
 <!-- public-release:start -->
 **YouTube Downloader 2.6.0 Preview**
 
 [Preview herunterladen](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Anleitung](https://popovantondev.github.io/YouTubeDownloader/Guide-de.html) · [Problem melden](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
-
-Preview 2.6.0 + PeakMP3 0.16.0
 
 ## Ohne Administrator installieren
 
@@ -45,4 +42,10 @@ YouTube kann Originalstreams mit attestation required ablehnen. Diese Version be
 
 SOURCE-KIT enthält Programm- und Erweiterungsquellen, Buildskripte und Prüfungen. FFmpeg/FFprobe sind enthalten. Passende FFmpeg/LAME-Quellarchive und Konfiguration liegen unter encoder, Lizenzen unter licenses. Eigener Code dient der Einsicht; unveränderte Programme dürfen privat genutzt werden. Drittanbieterbedingungen gelten separat. Siehe RIGHTS.md und THIRD_PARTY_NOTICES.md.
 
-**[Website · PeakMP3 testen](https://popovantondev.github.io/YouTubeDownloader/index-de.html)** · [PeakMP3 demo](https://popovantondev.github.io/PeakMP3/index-de.html#demo)
+**[YouTube-Downloader-Website](https://popovantondev.github.io/YouTubeDownloader/index-de.html)**
+
+## Verwandte Anwendung
+
+Das gemeinsame Setup enthält auch PeakMP3 0.16.0. Die Anleitung zur Audiobearbeitung steht auf der separaten Website.
+
+[Audiobearbeitung mit PeakMP3](https://popovantondev.github.io/PeakMP3/index-de.html) · [PeakMP3-Quellcode](https://github.com/popovantondev/PeakMP3)
