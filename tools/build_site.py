@@ -61,7 +61,7 @@ def icon(name):return '<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS[name]
 def wave():return '<span class="wave-mark" aria-hidden="true">'+('<i></i>'*5)+'</span>'
 def path(page,lang):return ('index' if page=='home' else 'Guide' if page=='guide' else page)+'-'+lang+'.html'
 def nav(page,l):
- d=D[l];links=''
+ d=D[l];links='<a href="https://popovantondev.github.io/popovantondev/'+('index.html' if l=='en' else 'index-'+l+'.html')+'">'+dict(ru='Все программы',de='Alle Programme',en='All applications')[l]+'</a>'
  for key,label in zip(['downloader','peakmp3','guide'],d['nav']):
   url='https://popovantondev.github.io/PeakMP3/index-'+l+'.html' if key=='peakmp3' else path(key,l)
   links+='<a href="'+url+'">'+e(label)+'</a>'
@@ -118,4 +118,7 @@ def main():
  (W/'strings.json').write_text(json.dumps({l:{k:D[l][k] for k in ['play','pause','stop','density','original','processed','demoPaused','demoPlaying']} for l in D},ensure_ascii=False),encoding='utf-8')
  (R/'index.html').write_text('''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YouTube Downloader + PeakMP3</title><script>var l;try{l=localStorage.getItem('studio.site.language')}catch(e){}l=l||navigator.language.slice(0,2);location.replace('index-'+(['ru','de','en'].includes(l)?l:'en')+'.html');</script></head><body><a href="index-ru.html">Русский</a> · <a href="index-de.html">Deutsch</a> · <a href="index-en.html">English</a></body></html>''',encoding='utf-8')
  print('Built 12 localized pages and 3 real extension UI previews')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ main()
+ import polish_guides
+ polish_guides.main()
