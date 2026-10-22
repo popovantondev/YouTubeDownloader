@@ -37,3 +37,9 @@
 .flow-icon .wave-mark{display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:scale(.5);transform-origin:center;width:50px;height:50px;margin:0}
 
 .flow-icon .flow-wave{transform:none}
+
+/* Responsive presentation polish. */
+
+.site-nav>*{min-width:0}.nav-links{flex-wrap:wrap}.image-note,.demo-status,.demo-small{font-size:14px;line-height:1.6}.flow-label{overflow-wrap:anywhere}.guide-content pre{max-width:100%;overflow:auto}
+@media(max-width:780px){.workflow-list{display:flex!important;flex-direction:column;align-items:stretch;gap:10px}.workflow-list .flow-step{display:flex;align-items:center;gap:14px}.workflow-list .flow-connector{height:24px;min-height:24px;align-self:center;margin:0;transform:rotate(90deg);width:34px;flex:none}.workflow-list .flow-label{line-height:1.4;text-align:left;min-height:44px}.flow-icon{flex-shrink:0}.guide-section{overflow-wrap:anywhere}.nav-links.open{max-height:none}.site-nav{flex-wrap:wrap}}
+
