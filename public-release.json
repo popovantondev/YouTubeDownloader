@@ -25,13 +25,13 @@
   },
   "readmes": {
     "en": [
-      "README.md"
+      "README.en.md"
     ],
     "ru": [
-      "docs/README.ru.md"
+      "README.ru.md"
     ],
     "de": [
-      "docs/README.de.md"
+      "README.md"
     ]
   },
   "guides": {
@@ -93,7 +93,7 @@
       "guide": "https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html"
     },
     "de": {
-      "website": "https://popovantondev.github.io/YouTubeDownloader/index-de.html",
+      "website": "https://popovantondev.github.io/YouTubeDownloader/index.html",
       "guide": "https://popovantondev.github.io/YouTubeDownloader/Guide-de.html"
     },
     "en": {

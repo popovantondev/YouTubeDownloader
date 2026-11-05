@@ -7,3 +7,7 @@ encoder/evidence/** -whitespace
 
 # Generated FFmpeg build evidence is not application source.
 encoder/evidence/** linguist-generated
+
+# Shared site kit: LF so that copies stay byte-identical
+assets/kit/* text eol=lf
+assets/kit/* linguist-vendored

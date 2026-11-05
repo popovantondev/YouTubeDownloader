@@ -1,6 +1,6 @@
 # 2.6.0 Preview / PeakMP3 0.16.0 — actual checks
 
-Local candidate, 2026-10-19. Not published to GitHub Releases or Pages.
+Local checks, 2026-10-19. Release v2.6.0 is published on GitHub Releases and Pages.
 Host: Microsoft Windows 11 Enterprise, 10.0.26200, 64 bit.
 
 ## Passed locally
@@ -62,7 +62,7 @@ FFmpeg, установка в папку с кириллицей, отказ п�
 Настоящая чистая Windows 7 SP1 **32 бита и слабый ПК ещё не проверены**. Windows 10,
 отдельная обычная учётная запись и живые браузерные загрузки также ожидают прогона.
 Отказ YouTube attestation required не объявляется исправленным. Синтетический образец
-не подтверждает звучание музыки или совпадение VU с AIMP. Публикация не выполнялась.
+не подтверждает звучание музыки или совпадение VU с AIMP.
 
 ## Deutsch
 
@@ -73,7 +73,7 @@ Entfernung unter Erhalt eigener Dateien. Ausgeführt auf Windows 11.
 Echtes sauberes Windows 7 SP1 **32 Bit und schwache Hardware sind noch ungeprüft**.
 Windows 10, separates Standardkonto und Live-Browserdownloads stehen ebenfalls aus.
 YouTube attestation required bleibt eine bekannte Grenze. Synthetische Prüftöne sind
-kein Musik-Hörvergleich oder Nachweis identischer AIMP-Anzeige. Nicht veröffentlicht.
+kein Musik-Hörvergleich oder Nachweis identischer AIMP-Anzeige.
 
 ## User-reported environments — 2026-10-20
 
@@ -81,8 +81,8 @@ The user reports successful operation on Windows 11 with current Google Chrome,
 and Windows 7 with its last compatible Yandex and Chrome (approximately 109).
 Exact builds and a complete installation/plain MP3/AAC handoff/processed export
 matrix were not recorded. These reports do not replace the local checks above;
-no Windows 10 result or agent-run Windows 7 test is claimed.
+no Windows 10 result or automated Windows 7 test is claimed.
 
 Website: 12 localized pages returned HTTP 200; local assets resolved. RU/DE
 navigation, mobile menu at 390px, silent demo play/stop, density and A/B were checked
-in a browser. Final design approved by the user; external platter lip cleanup preserves the internal strobe dots. The final installer payload passed isolated install, tamper rejection, rollback, actual 2.5.0 upgrade/restore and compiled Setup/uninstall checks on 2026-10-20.
+in a browser. Final design reviewed; external platter lip cleanup preserves the internal strobe dots. The final installer payload passed isolated install, tamper rejection, rollback, actual 2.5.0 upgrade/restore and compiled Setup/uninstall checks on 2026-10-20.

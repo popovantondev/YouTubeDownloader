@@ -1,6 +1,6 @@
 # YouTube Downloader
 
-**[Русский](README.ru.md) · [Deutsch](README.de.md) · [English](../README.md)**
+**[Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)**
 
 Загрузка видео и аудио с YouTube для Windows. Форматы и видимость кнопок выбираются в расширении браузера.
 
@@ -44,8 +44,10 @@ YouTube может отказать с attestation required. Эта версия
 
 **[Сайт YouTube Downloader](https://popovantondev.github.io/YouTubeDownloader/index-ru.html)**
 
-## Связанная программа
+## Один установщик, две программы
 
-Общий установщик также включает PeakMP3 0.16.0. Инструкции по обработке аудио находятся на её отдельном сайте.
+В релизе v2.6.0 один общий установщик `YouTubeDownloader-PeakMP3-2.6.0-Preview-Setup.exe`. Он ставит две программы: **YouTube Downloader 2.6.0** (расширение браузера и локальный компонент) и **PeakMP3 0.16.0** (обработка звука, свой репозиторий и свой сайт). Поэтому загрузка PeakMP3 ведёт на этот релиз.
+
+Медиаинструменты FFmpeg и LAME распространяются по LGPL. Соответствующий исходный код и параметры сборки лежат отдельным файлом в том же релизе: [исходники FFmpeg](https://github.com/popovantondev/YouTubeDownloader/releases/download/v2.6.0/YouTubeDownloader-2.6.0-FFmpeg-Corresponding-Sources.zip). Подробнее: THIRD_PARTY_NOTICES.md.
 
 [Аудиообработка PeakMP3](https://popovantondev.github.io/PeakMP3/index-ru.html) · [Исходники PeakMP3](https://github.com/popovantondev/PeakMP3)

@@ -3,8 +3,8 @@ from pathlib import Path
 import argparse,hashlib,json,zipfile
 ROOT=Path(__file__).resolve().parents[1]
 FOLDERS=('extension','SOURCE','encoder','assets','docs','licenses','tools','.github')
-FILES=('README.md','RIGHTS.md','THIRD_PARTY_NOTICES.md','public-release.json','BUILD_HOST.cmd','Install.cmd','Uninstall.cmd','Restore_previous.cmd','CHECK_ENVIRONMENT.cmd','CHECK_VIDEO.cmd','VERIFY_PACKAGE.cmd','VERIFY_PACKAGE.ps1','setup.js','diagnose.js','register_sabr_host.js','YTWin7SabrHost.exe.config','index.html','index-en.html','index-ru.html','index-de.html','Guide-en.html','Guide-ru.html','Guide-de.html','site.css','site.js','.nojekyll','.gitignore','.gitattributes')
-RUNTIME=('YTWin7SabrHost.exe','YTWin7SabrHost.exe.config','ffmpeg.exe','ffprobe.exe','Install.cmd','Uninstall.cmd','Restore_previous.cmd','CHECK_ENVIRONMENT.cmd','CHECK_VIDEO.cmd','VERIFY_PACKAGE.cmd','VERIFY_PACKAGE.ps1','setup.js','diagnose.js','register_sabr_host.js','README.md','RIGHTS.md','THIRD_PARTY_NOTICES.md','public-release.json','Guide-en.html','Guide-ru.html','Guide-de.html','site.css','site.js')
+FILES=('README.md','RIGHTS.md','THIRD_PARTY_NOTICES.md','public-release.json','BUILD_HOST.cmd','Install.cmd','Uninstall.cmd','Restore_previous.cmd','CHECK_ENVIRONMENT.cmd','CHECK_VIDEO.cmd','VERIFY_PACKAGE.cmd','VERIFY_PACKAGE.ps1','setup.js','diagnose.js','register_sabr_host.js','YTWin7SabrHost.exe.config','index.html','index-en.html','index-ru.html','index-de.html','Guide-en.html','Guide-ru.html','Guide-de.html','README.en.md','README.ru.md','.nojekyll','.gitignore','.gitattributes')
+RUNTIME=('YTWin7SabrHost.exe','YTWin7SabrHost.exe.config','ffmpeg.exe','ffprobe.exe','Install.cmd','Uninstall.cmd','Restore_previous.cmd','CHECK_ENVIRONMENT.cmd','CHECK_VIDEO.cmd','VERIFY_PACKAGE.cmd','VERIFY_PACKAGE.ps1','setup.js','diagnose.js','register_sabr_host.js','README.md','RIGHTS.md','THIRD_PARTY_NOTICES.md','public-release.json','Guide-en.html','Guide-ru.html','Guide-de.html')
 def digest(b):return hashlib.sha256(b).hexdigest()
 def files_under(folder):
  for p in sorted((ROOT/folder).rglob('*')):

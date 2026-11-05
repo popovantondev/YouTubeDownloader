@@ -14,7 +14,7 @@ Run the combined Setup.exe without administrator rights or extract the complete 
 
 ## Limitations
 
-Preview: attestation required refusals remain unresolved. Playback does not start automatically. The full live browser/format matrix, Windows 10 and an agent-run Windows 7 test remain unverified. Synthetic tests do not establish music sound quality or exact AIMP VU matching. DRM, Vimeo, other websites, livestreams and playlists are out of scope. Executables are unsigned.
+Preview: attestation required refusals remain unresolved. Playback does not start automatically. The full live browser/format matrix, Windows 10 and an automated Windows 7 test remain unverified. Synthetic tests do not establish music sound quality or exact AIMP VU matching. DRM, Vimeo, other websites, livestreams and playlists are out of scope. Executables are unsigned.
 
 ## Checksums
 

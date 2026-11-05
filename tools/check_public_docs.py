@@ -39,7 +39,7 @@ def main():
  for p in [*ROOT.glob('*.html'),*(ROOT/'docs').glob('*.html')]:
   s=p.read_text(encoding='utf-8');links=Links();links.feed(s)
   if p.name.startswith('peakmp3-') and 'http-equiv="refresh"' in s:
-   lang=p.stem.split('-')[-1];destination='https://popovantondev.github.io/PeakMP3/index-'+lang+'.html'
+   lang=p.stem.split('-')[-1];destination='https://popovantondev.github.io/PeakMP3/'+('index.html' if lang=='de' else 'index-'+lang+'.html')  # German is the root page of PeakMP3
    if destination not in links.values or 'url='+destination not in s:errors.append('Incorrect product redirect: '+p.name)
    continue
   for value in links.values:
@@ -49,6 +49,7 @@ def main():
    for lang in ['en','de','ru']:
     prefix=next((x for x in ['Guide-','downloader-','peakmp3-'] if p.name.startswith(x)),'index-')
     expected=prefix+lang+'.html'
+    if prefix=='index-' and lang=='de':expected='index.html'  # German is the root page; index-de.html only redirects
     if not any(v.split('/')[-1]==expected for v in links.values):errors.append('Missing language link: '+p.name+' -> '+expected)
  if args.online:
   for a in d['assets']:
