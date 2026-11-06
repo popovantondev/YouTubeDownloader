@@ -206,6 +206,9 @@ def landing(l):
     return {'de': 'index.html', 'en': 'index-en.html', 'ru': 'index-ru.html'}[l]
 
 
+HOME_LABEL = {'ru': '← На страницу программы', 'de': '← Zur Programmseite', 'en': '← Program page'}
+
+
 def path(page, l):
     if page == 'home':
         return landing(l)
@@ -354,7 +357,7 @@ def guide(l):
                 f'<p>{e(d["helpText"])}</p><p class="ppk-notice">{e(d["limitation"])}</p>',
                 rights]
     content = ''.join(f'<section id="{a}"><h2>{e(b)}</h2>{c}</section>' for a, b, c in zip(ids, names, sections))
-    return (f'<main class="ppk-shell" id="content"><header class="yt-guide-head"><p class="yt-kicker">{e(d["guidePreview"])}</p>'
+    return (f'<main class="ppk-shell" id="content"><p class="yt-guide-home"><a class="ppk-btn" href="{path("home", l)}">{e(HOME_LABEL[l])}</a></p><header class="yt-guide-head"><p class="yt-kicker">{e(d["guidePreview"])}</p>'
             f'<h1>{e(d["guideTitle"])}</h1><p class="ppk-lead">{e(d["guideLead"])}</p></header>'
             f'<div class="yt-guide-layout"><nav class="yt-toc" aria-label="{e(t["toc"])}">{toc}</nav>'
             f'<div class="yt-guide-content ppk-prose">{content}</div></div></main>')
@@ -365,11 +368,13 @@ def page(kind, l):
     body = {'home': downloader, 'downloader': downloader, 'guide': guide}[kind](l)
     alt = ''.join(f'<link rel="alternate" hreflang="{x}" href="{path("guide" if kind == "guide" else "downloader" if kind == "downloader" else "home", x)}">' for x in LANGS)
     desc = D_JSON['description'][l]
-    return (f'<!doctype html>\n<html lang="{l}">\n<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    html = (f'<!doctype html>\n<html lang="{l}">\n<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<meta name="color-scheme" content="light dark"><meta name="description" content="{e(desc)}">'
             f'<meta name="application-version" content="{e(VERSION)}"><title>{e(title)}</title>'
             f'<link rel="icon" href="extension/icons/icon128.png">{head_assets()}{alt}</head>\n'
             f'<body class="ppk-page yt-site {kind}" data-lang="{l}" data-page="{kind}">\n{nav(kind, l)}\n{body}\n{footer(l)}\n</body>\n</html>\n')
+    # site.css gained the guide home-link rule: new revision for the guides only.
+    return html.replace(f'website/site.css?v={KIT}', f'website/site.css?v={KIT}-g1') if kind == 'guide' else html
 
 
 def redirect_peak(l):
@@ -427,6 +432,8 @@ SITE_CSS = '''/* Page rules of the YouTube Downloader site. Tokens, header, foot
 .yt-table th,.yt-table td{padding:10px 12px;border:1px solid var(--ppk-line);text-align:left;vertical-align:top}
 .yt-table thead th{background:var(--ppk-tint)}
 .ppk-notice{margin:20px 0 0;padding:12px 14px;border-radius:var(--ppk-radius-m);background:var(--ppk-tint);color:var(--ppk-ink);font-size:15px}
+.yt-guide-home{margin:24px 0 0}
+.yt-guide-home+.yt-guide-head{padding-top:20px}
 .yt-guide-head{padding:36px 0 12px}.yt-guide-head h1{margin:6px 0 12px}
 .yt-kicker{margin:0;color:var(--ppk-accent);font-weight:700;font-size:14px;letter-spacing:.04em}
 .yt-guide-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:32px;align-items:start;margin:12px 0 40px}

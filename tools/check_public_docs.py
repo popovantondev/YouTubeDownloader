@@ -42,6 +42,9 @@ def main():
    lang=p.stem.split('-')[-1];destination='https://popovantondev.github.io/PeakMP3/'+('index.html' if lang=='de' else 'index-'+lang+'.html')  # German is the root page of PeakMP3
    if destination not in links.values or 'url='+destination not in s:errors.append('Incorrect product redirect: '+p.name)
    continue
+  if p.name.startswith('Guide-'):
+   lang=p.stem[-2:];home={'ru':'← На страницу программы','de':'← Zur Programmseite','en':'← Program page'}[lang];landing={'de':'index.html','en':'index-en.html','ru':'index-ru.html'}[lang]
+   if not re.search(r'<a\b[^>]*href="(?:\.\./)?'+landing+r'"[^>]*>\s*'+home+r'\s*</a>',s):errors.append('No button to the program page: '+p.name)
   for value in links.values:
    if value.startswith(('#','https://','http://','mailto:','chrome:','edge:','browser:')):continue
    target=p.parent/unescape(value.split('#')[0].split('?')[0])

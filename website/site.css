@@ -19,6 +19,8 @@
 .yt-table th,.yt-table td{padding:10px 12px;border:1px solid var(--ppk-line);text-align:left;vertical-align:top}
 .yt-table thead th{background:var(--ppk-tint)}
 .ppk-notice{margin:20px 0 0;padding:12px 14px;border-radius:var(--ppk-radius-m);background:var(--ppk-tint);color:var(--ppk-ink);font-size:15px}
+.yt-guide-home{margin:24px 0 0}
+.yt-guide-home+.yt-guide-head{padding-top:20px}
 .yt-guide-head{padding:36px 0 12px}.yt-guide-head h1{margin:6px 0 12px}
 .yt-kicker{margin:0;color:var(--ppk-accent);font-weight:700;font-size:14px;letter-spacing:.04em}
 .yt-guide-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:32px;align-items:start;margin:12px 0 40px}
