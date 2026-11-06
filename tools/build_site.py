@@ -246,9 +246,9 @@ def nav(kind, l):
         f'  </nav>\n</div>')
 
 
-LEGAL_LINKS = {'ru': ('Сообщить о проблеме', 'Условия использования'),
-               'de': ('Problem melden', 'Nutzungsbedingungen'),
-               'en': ('Report a problem', 'Terms of use')}
+LEGAL_LINKS = {'ru': ('Сообщить об ошибке', 'Права'),
+               'de': ('Problem melden', 'Rechte'),
+               'en': ('Report a problem', 'Rights')}
 
 
 def footer(l):
@@ -257,9 +257,9 @@ def footer(l):
     return (
         f'<footer class="ppk-footer">\n  <span>© 2026 Anton Popov · YouTube Downloader {e(VERSION)}</span>\n'
         f'  <nav aria-label="{e(t["legal"])}"><a href="{PROFILE}impressum.html">Impressum</a>'
-        f'<a href="{PROFILE}datenschutz.html">Datenschutz</a><a href="{e(GITHUB)}">GitHub</a>'
-        f'<a href="{e(D_JSON["feedback_url"])}">{issue_label}</a>'
-        f'<a href="{e(GITHUB)}/blob/main/RIGHTS.md">{rights_label}</a></nav>\n</footer>')
+        f'<a href="{PROFILE}datenschutz.html">Datenschutz</a>'
+        f'<a href="{e(GITHUB)}/blob/main/RIGHTS.md">{rights_label}</a>'
+        f'<a href="{e(D_JSON["feedback_url"])}">{issue_label}</a><a href="{e(GITHUB)}">GitHub</a></nav>\n</footer>')
 
 
 def download_button(l, classes='ppk-btn ppk-btn-primary'):
@@ -364,7 +364,8 @@ def guide(l):
 
 
 def page(kind, l):
-    title = 'YouTube Downloader' if kind in ('home', 'downloader') else T[l]['guide'] + ' — YouTube Downloader + PeakMP3'
+    gist = re.split(r'(?<=[.!?])\s', D_JSON['description'][l].strip())[0].rstrip('.')
+    title = 'YouTube Downloader — ' + (gist if kind in ('home', 'downloader') else T[l]['guide'])
     body = {'home': downloader, 'downloader': downloader, 'guide': guide}[kind](l)
     alt = ''.join(f'<link rel="alternate" hreflang="{x}" href="{path("guide" if kind == "guide" else "downloader" if kind == "downloader" else "home", x)}">' for x in LANGS)
     desc = D_JSON['description'][l]
