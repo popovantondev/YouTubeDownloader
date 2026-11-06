@@ -1,6 +1,10 @@
+<div align="center">
+  <img src="extension/icons/icon128.png" width="128" alt="YouTube Downloader Symbol">
+</div>
+
 # YouTube Downloader
 
-**[Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)**
+[Русский](README.ru.md) · **Deutsch** · [English](README.en.md)
 
 YouTube-Videos und Audio unter Windows herunterladen. Formate und sichtbare Schaltflächen lassen sich in der Browser-Erweiterung auswählen.
 
@@ -9,6 +13,10 @@ YouTube-Videos und Audio unter Windows herunterladen. Formate und sichtbare Scha
 
 [Preview herunterladen](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Anleitung](https://popovantondev.github.io/YouTubeDownloader/Guide-de.html) · [Problem melden](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
+
+**[Webseite](https://popovantondev.github.io/YouTubeDownloader/)**
+
+![Popup der Browser-Erweiterung](assets/screenshots/chrome-popup-de-light.png)
 
 ## Ohne Administrator installieren
 

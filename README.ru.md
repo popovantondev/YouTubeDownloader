@@ -1,6 +1,10 @@
+<div align="center">
+  <img src="extension/icons/icon128.png" width="128" alt="Значок YouTube Downloader">
+</div>
+
 # YouTube Downloader
 
-**[Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)**
+**Русский** · [Deutsch](README.md) · [English](README.en.md)
 
 Загрузка видео и аудио с YouTube для Windows. Форматы и видимость кнопок выбираются в расширении браузера.
 
@@ -9,6 +13,10 @@
 
 [Скачать Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Инструкция](https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html) · [Сообщить об ошибке](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
+
+**[Сайт](https://popovantondev.github.io/YouTubeDownloader/index-ru.html)**
+
+![Всплывающее окно расширения для браузера](assets/screenshots/chrome-popup-ru-light.png)
 
 ## Установка без администратора
 

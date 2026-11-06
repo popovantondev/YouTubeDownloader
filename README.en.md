@@ -1,6 +1,10 @@
+<div align="center">
+  <img src="extension/icons/icon128.png" width="128" alt="YouTube Downloader icon">
+</div>
+
 # YouTube Downloader
 
-**[Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)**
+[Русский](README.ru.md) · [Deutsch](README.md) · **English**
 
 Download YouTube video and audio on Windows. Choose formats and visible download buttons in the browser extension.
 
@@ -9,6 +13,10 @@ Download YouTube video and audio on Windows. Choose formats and visible download
 
 [Download Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [User guide](https://popovantondev.github.io/YouTubeDownloader/Guide-en.html) · [Report a problem](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
+
+**[Website](https://popovantondev.github.io/YouTubeDownloader/index-en.html)**
+
+![Browser extension popup](assets/screenshots/chrome-popup-en-light.png)
 
 ## Install without administrator rights
 
