@@ -1,3 +1,4 @@
-455a2f244be321b30becf51df0706baa08368ec1e2afd993470e64d9e024c462  YouTubeDownloader-2.5.0-windows-full.zip
-16d21b0532a473afcedfd7e9a0862f9372aa763bf054a6e16a60487b466bc159  YouTubeDownloader-2.5.0-source.zip
-9e44f623e1fcb2604abaad9f98a692dfa5e4512d83aba3f19cb6c2469ab73b6f  YouTubeDownloader-2.5.0-corresponding-sources.zip
+0866f897810e7524f49585d13370166935805a9f45381986dd90c3b3a3096be7  YouTubeDownloader-PeakMP3-2.6.0-Preview-Setup.exe
+969f67a69b82ed1d2ba3905ed007a8131e2e5a232ebfeef5f978cb4e6952d5d4  YouTubeDownloader-PeakMP3-2.6.0-Preview-FULL.zip
+d1dc502d16ce77c98c96b311bf200b24a20ccbf8eed0d2af3125686876b874ea  YouTubeDownloader-PeakMP3-2.6.0-Preview-SOURCES.zip
+dd1316f340a43cf48ce6276ef80209e1aa0025ef736ed9dbac4f7ec6e0b78950  YouTubeDownloader-2.6.0-FFmpeg-Corresponding-Sources.zip
