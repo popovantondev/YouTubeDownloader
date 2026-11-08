@@ -1,5 +1,5 @@
 <!-- ppk-readme:head:start -->
-<a href="https://popovantondev.github.io/YouTubeDownloader/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-dark.5c7e8b8b.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-light.72c65c5e.svg" width="880" height="188" alt="YouTube Downloader — Сохраняет видео и звук YouTube в Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Предварительный выпуск 2.6.0"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-dark.997389c8.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-light.ab08a034.svg" width="880" height="188" alt="YouTube Downloader — Сохраняет видео и звук YouTube в Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Предварительный выпуск 2.6.0"></picture></a>
 <!-- ppk-readme:head:end -->
 
 # YouTube Downloader

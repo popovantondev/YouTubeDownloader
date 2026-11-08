@@ -1,5 +1,5 @@
 <!-- ppk-readme:head:start -->
-<a href="https://popovantondev.github.io/YouTubeDownloader/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-dark.6f80db65.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-light.a0f46822.svg" width="880" height="188" alt="YouTube Downloader — Saves YouTube video and audio on Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Preview 2.6.0"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-dark.c6db99df.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-light.ca116d43.svg" width="880" height="188" alt="YouTube Downloader — Saves YouTube video and audio on Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Preview 2.6.0"></picture></a>
 <!-- ppk-readme:head:end -->
 
 # YouTube Downloader

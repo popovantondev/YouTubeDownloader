@@ -236,7 +236,7 @@ def nav(kind, l):
         f'<a class="ppk-skip" href="#content">{e(t["skip"])}</a>\n'
         f'<div class="ppk-nav-wrap" id="ppk-nav-wrap">\n'
         f'  <nav class="ppk-nav" aria-label="{e(t["nav"])}">\n'
-        f'    <a class="ppk-brand" href="{landing(l)}"><img src="extension/icons/icon128.png" alt="" width="34" height="34"><span>YouTube Downloader</span></a>\n'
+        f'    <a class="ppk-brand" href="{landing(l)}"><img src="assets/app-icon.png" alt="" width="34" height="34"><span>YouTube Downloader</span></a>\n'
         f'    <span class="ppk-spacer"></span>\n'
         f'    <a class="ppk-back" href="{catalog(l)}">{e(t["back"])}</a>\n'
         f'    <button class="ppk-search-btn" type="button" data-ppk-open-search aria-label="{e(t["search"])}"><span>{e(t["search_text"])}</span><kbd>{e(t["kbd"])}</kbd></button>\n'
@@ -372,7 +372,7 @@ def page(kind, l):
     html = (f'<!doctype html>\n<html lang="{l}">\n<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<meta name="color-scheme" content="light dark"><meta name="description" content="{e(desc)}">'
             f'<meta name="application-version" content="{e(VERSION)}"><title>{e(title)}</title>'
-            f'<link rel="icon" href="extension/icons/icon128.png">{head_assets()}{alt}</head>\n'
+            f'<link rel="icon" href="assets/app-icon.png">{head_assets()}{alt}</head>\n'
             f'<body class="ppk-page yt-site {kind}" data-lang="{l}" data-page="{kind}">\n{nav(kind, l)}\n{body}\n{footer(l)}\n</body>\n</html>\n')
     # site.css gained the guide home-link rule: new revision for the guides only.
     return html.replace(f'website/site.css?v={KIT}', f'website/site.css?v={KIT}-g1') if kind == 'guide' else html
