@@ -1,10 +1,24 @@
-<div align="center">
-  <img src="extension/icons/icon128.png" width="128" alt="Значок YouTube Downloader">
-</div>
+<!-- ppk-readme:head:start -->
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-dark.5c7e8b8b.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-ru-light.72c65c5e.svg" width="880" height="188" alt="YouTube Downloader — Сохраняет видео и звук YouTube в Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Предварительный выпуск 2.6.0"></picture></a>
+<!-- ppk-readme:head:end -->
 
 # YouTube Downloader
 
 **Русский** · [Deutsch](README.md) · [English](README.en.md)
+
+<!-- ppk-readme:body:start -->
+<p>
+<a href="https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-download-ru-dark.9793cecd.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-download-ru-light.d618de6f.svg" width="120" height="36" alt="Скачать"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-website-ru-dark.9a0b9e6c.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-website-ru-light.4236ca3c.svg" width="92" height="36" alt="Сайт"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-guide-ru-dark.e0e81c95.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-guide-ru-light.fc6ac748.svg" width="161" height="36" alt="Руководство"></picture></a>
+<a href="https://github.com/popovantondev/YouTubeDownloader/issues/new/choose"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-bug-ru-dark.987a1f79.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-bug-ru-light.9f805c00.svg" width="234" height="36" alt="Сообщить об ошибке"></picture></a>
+</p>
+
+<p><a href="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/assets/screenshots/chrome-popup-ru-light.png"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/preview-ru-dark.fa1c2b06.webp"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/preview-ru-light.3635ab95.webp" width="880" height="516" alt="Интерфейс программы YouTube Downloader"></picture></a><br>
+<sub><a href="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/assets/screenshots/chrome-popup-ru-light.png">Снимок целиком</a></sub></p>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/divider-dark.da40df51.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/divider-light.0dc38d22.svg" width="880" height="6" alt="Разделитель"></picture>
+<!-- ppk-readme:body:end -->
 
 Загрузка видео и аудио с YouTube для Windows. Форматы и видимость кнопок выбираются в расширении браузера.
 
@@ -13,10 +27,6 @@
 
 [Скачать Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [Инструкция](https://popovantondev.github.io/YouTubeDownloader/Guide-ru.html) · [Сообщить об ошибке](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
-
-**[Сайт](https://popovantondev.github.io/YouTubeDownloader/index-ru.html)**
-
-![Всплывающее окно расширения для браузера](assets/screenshots/chrome-popup-ru-light.png)
 
 ## Установка без администратора
 

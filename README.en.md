@@ -1,10 +1,24 @@
-<div align="center">
-  <img src="extension/icons/icon128.png" width="128" alt="YouTube Downloader icon">
-</div>
+<!-- ppk-readme:head:start -->
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-dark.6f80db65.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/header-en-light.a0f46822.svg" width="880" height="188" alt="YouTube Downloader — Saves YouTube video and audio on Windows. Windows 7 SP1 / 10 / 11 · x86 / x64, Preview 2.6.0"></picture></a>
+<!-- ppk-readme:head:end -->
 
 # YouTube Downloader
 
 [Русский](README.ru.md) · [Deutsch](README.md) · **English**
+
+<!-- ppk-readme:body:start -->
+<p>
+<a href="https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-download-en-dark.f8ce8eb1.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-download-en-light.0f774e0f.svg" width="136" height="36" alt="Download"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-website-en-dark.5cf36359.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-website-en-light.fccb55e8.svg" width="120" height="36" alt="Website"></picture></a>
+<a href="https://popovantondev.github.io/YouTubeDownloader/Guide-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-guide-en-dark.a026a2e7.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-guide-en-light.37b8654c.svg" width="141" height="36" alt="User guide"></picture></a>
+<a href="https://github.com/popovantondev/YouTubeDownloader/issues/new/choose"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-bug-en-dark.d1ad18c9.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/btn-bug-en-light.6f532d80.svg" width="196" height="36" alt="Report a problem"></picture></a>
+</p>
+
+<p><a href="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/assets/screenshots/chrome-popup-en-light.png"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/preview-en-dark.daac4811.webp"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/preview-en-light.beaa6f34.webp" width="880" height="516" alt="YouTube Downloader interface"></picture></a><br>
+<sub><a href="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/assets/screenshots/chrome-popup-en-light.png">Full screenshot</a></sub></p>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/divider-dark.da40df51.svg"><img src="https://raw.githubusercontent.com/popovantondev/YouTubeDownloader/main/docs/readme/divider-light.0dc38d22.svg" width="880" height="6" alt="Divider"></picture>
+<!-- ppk-readme:body:end -->
 
 Download YouTube video and audio on Windows. Choose formats and visible download buttons in the browser extension.
 
@@ -13,10 +27,6 @@ Download YouTube video and audio on Windows. Choose formats and visible download
 
 [Download Preview](https://github.com/popovantondev/YouTubeDownloader/releases/tag/v2.6.0) · [User guide](https://popovantondev.github.io/YouTubeDownloader/Guide-en.html) · [Report a problem](https://github.com/popovantondev/YouTubeDownloader/issues/new/choose)
 <!-- public-release:end -->
-
-**[Website](https://popovantondev.github.io/YouTubeDownloader/index-en.html)**
-
-![Browser extension popup](assets/screenshots/chrome-popup-en-light.png)
 
 ## Install without administrator rights
 
