@@ -38,3 +38,5 @@
 @media (max-width:900px){.yt-guide-layout{grid-template-columns:1fr}.yt-toc{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.yt-features{grid-template-columns:1fr}.yt-split{grid-template-columns:1fr;padding:22px}.yt-package{padding:22px}.yt-guide-content section{padding:20px}}
 @media (max-width:420px){.yt-toc{grid-template-columns:1fr}}
+/* Phones (2026-11-16): finger-sized links in the contents and the download row */
+@media (max-width:640px){.yt-toc a,.download-links a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}}

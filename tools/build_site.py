@@ -374,8 +374,8 @@ def page(kind, l):
             f'<meta name="application-version" content="{e(VERSION)}"><title>{e(title)}</title>'
             f'<link rel="icon" href="assets/app-icon.png">{head_assets()}{alt}</head>\n'
             f'<body class="ppk-page yt-site {kind}" data-lang="{l}" data-page="{kind}">\n{nav(kind, l)}\n{body}\n{footer(l)}\n</body>\n</html>\n')
-    # site.css gained the guide home-link rule: new revision for the guides only.
-    return html.replace(f'website/site.css?v={KIT}', f'website/site.css?v={KIT}-g1') if kind == 'guide' else html
+    # site.css gained the guide home-link rule (-g1) and the phone rules (-m1): new revision for every page.
+    return html.replace(f'website/site.css?v={KIT}', f'website/site.css?v={KIT}-' + ('g1m1' if kind == 'guide' else 'm1'))
 
 
 def redirect_peak(l):
@@ -452,6 +452,8 @@ SITE_CSS = '''/* Page rules of the YouTube Downloader site. Tokens, header, foot
 @media (max-width:900px){.yt-guide-layout{grid-template-columns:1fr}.yt-toc{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.yt-features{grid-template-columns:1fr}.yt-split{grid-template-columns:1fr;padding:22px}.yt-package{padding:22px}.yt-guide-content section{padding:20px}}
 @media (max-width:420px){.yt-toc{grid-template-columns:1fr}}
+/* Phones (2026-11-16): finger-sized links in the contents and the download row */
+@media (max-width:640px){.yt-toc a,.download-links a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}}
 '''
 
 SITE_JS = '''(() => {
